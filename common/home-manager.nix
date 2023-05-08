@@ -25,6 +25,9 @@ in
       if test -d $HOME/.cargo/bin
         fish_add_path $HOME/.cargo/bin
       end
+      if test -d "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+        fish_add_path "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+      end
       set -gx CDPATH . $HOME/${workProjectDir} $HOME/Source $HOME/source
     '';
     plugins = [
