@@ -48,8 +48,8 @@ Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
 
 ### NixOS
 
-1. Download the [latest NixOS stable distribution](https://nixos.org/manual/nixos/stable/index.html#sec-obtaining), these instructions were
-   tested with 22.11, download the minimal distribution, not graphical.
+1. Download the [latest NixOS stable distribution](https://nixos.org/manual/nixos/stable/index.html#sec-obtaining),
+   these instructions were tested with 22.11. Download the minimal distribution, not graphical.
    
 2. Create a [bootable USB](https://nixos.org/manual/nixos/stable/index.html#sec-booting-from-usb).
 
@@ -59,7 +59,7 @@ Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
    
 5. Run `nixos-generate-config --root /mnt`
 
-6. Clone this repository to `/mnt/nix-config`:
+6. Clone this repository to `/mnt/etc/nixos/nixos-config`:
 
    ```shell
    nix-shell -p git
