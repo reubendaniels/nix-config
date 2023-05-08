@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+export NIXPKGS_ALLOW_UNFREE=1
+unset CDPATH
+FLAKE_DIR=$(cd "$(dirname "$0")"; pwd)
+
+macos() {
+  host="$(hostname)"
+  FLAKE="${FLAKE:-$host}"
+  system="darwinConfigurations.$FLAKE.system"
+
+  nix --experimental-features 'nix-command flakes' build "${FLAKE_DIR}#$system" --impure $@
+  ./result/sw/bin/darwin-rebuild switch --flake .#$FLAKE --impure $@
+  rm -rf ./result
+}
+
+nixos() {
+  host="$(hostname)"
+  FLAKE="${FLAKE:-$host}"
+  system="nixosConfigurations.$FLAKE.system"
+  # --install-bootloader is a workaround for https://github.com/NixOS/nixpkgs/issues/223579,
+  # remove it once that bug is fixed
+  sudo -E /run/current-system/sw/bin/nixos-rebuild switch --flake "${FLAKE_DIR}#$FLAKE" --install-bootloader $@
+}
+
+if [ "$(uname)" == "Darwin" ]; then
+  macos $@
+elif [ "$(uname)" == "Linux" ]; then
+  nixos $@
+else
+  echo "Unsupported operating system"
+fi
