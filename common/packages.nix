@@ -60,7 +60,7 @@ with pkgs; [
   zip
 ]
 ++
-lib.optionals machineConfig.isDesktop [
+lib.optionals (machineConfig.isDesktop || !machineConfig.isPersonal) [
   chromedriver
   cascadia-code
   sf-mono
