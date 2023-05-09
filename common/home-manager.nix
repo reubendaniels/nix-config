@@ -28,7 +28,12 @@ in
       if test -d "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
         fish_add_path "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
       end
+
       set -gx CDPATH . $HOME/${workProjectDir} $HOME/Source $HOME/source
+
+      alias kc kubectl
+      alias cat "bat -p"
+      alias less "bat -p"
     '';
     plugins = [
       {

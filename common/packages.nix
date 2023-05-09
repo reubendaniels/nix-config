@@ -32,6 +32,7 @@ with pkgs; [
   jdk17
   jetbrains-mono
   jq
+  kubectl
   maven
   neofetch
   nmap
