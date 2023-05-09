@@ -33,6 +33,7 @@ with pkgs; [
   jetbrains-mono
   jq
   kubectl
+  kubelogin-oidc
   maven
   neofetch
   nmap
