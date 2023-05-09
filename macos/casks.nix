@@ -5,6 +5,7 @@
 
 [
   "brave-browser"
+  "google-chrome"
   "jetbrains-toolbox"
   "postico"
   "postgres-unofficial"
