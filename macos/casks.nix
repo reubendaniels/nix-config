@@ -17,3 +17,7 @@ lib.optionals machineConfig.isPersonal [
   "vlc"
   "transmission"
 ]
+++
+lib.optionals (!machineConfig.isPersonal) [
+  "postman"
+]
