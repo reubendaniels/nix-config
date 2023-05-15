@@ -46,6 +46,8 @@ with pkgs; [
   rustc
   rustfmt
   rye
+  cascadia-code
+  sf-mono
   step-cli
   sqlite
   terraform
@@ -62,7 +64,5 @@ with pkgs; [
 ++
 lib.optionals (machineConfig.isDesktop || !machineConfig.isPersonal) [
   chromedriver
-  cascadia-code
-  sf-mono
   vscode
 ]
