@@ -7,7 +7,7 @@ end
 
 -- fonts
 
-config.font = wezterm.font('SF Mono', { weight = 'Bold' })
+config.font = wezterm.font('SF Mono', { weight = 'Semibold' })
 config.font_size = 11.0
 
 -- window configuration
