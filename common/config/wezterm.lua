@@ -17,7 +17,7 @@ config.window_padding = {
   left = 15,
   right = 15,
   top = 50,
-  bottom = 15,
+  bottom = 10,
 }
 
 -- window frame colors
