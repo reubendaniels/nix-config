@@ -154,4 +154,9 @@ in
 
   gpg.enable = true;
   direnv.enable = true;
+
+  wezterm = {
+    enable = true;
+    extraConfig = builtins.readFile ./config/wezterm.lua;
+  }
 }
