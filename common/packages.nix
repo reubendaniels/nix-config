@@ -6,8 +6,6 @@ with pkgs; [
   awscli2
   bat
   bun
-  cargo
-  clippy
   cloudfoundry-cli
   curl
   difftastic
@@ -43,9 +41,8 @@ with pkgs; [
   nodejs-16_x
   pinentry
   ripgrep
-  rustc
-  rustfmt
   rye
+  rustup
   cascadia-code
   sf-mono
   step-cli

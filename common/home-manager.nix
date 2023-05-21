@@ -28,6 +28,9 @@ in
       if test -d "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
         fish_add_path "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
       end
+      if test -d "/Applications/Postgres.app/Contents/Versions/latest/bin"
+        fish_add_path "/Applications/Postgres.app/Contents/Versions/latest/bin"
+      end
 
       set -gx CDPATH . $HOME/${workProjectDir} $HOME/Source $HOME/source
 
