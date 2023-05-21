@@ -10,7 +10,7 @@ end
 config.font = wezterm.font('SF Mono', { weight = 'DemiBold' })
 config.font_size = 11.0
 config.initial_cols = 110
-config.initial_rows = 50
+config.initial_rows = 35
 
 -- window configuration
 
