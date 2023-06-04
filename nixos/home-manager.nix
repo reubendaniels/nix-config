@@ -85,7 +85,7 @@ in
   services.sxhkd = {
     enable = machineConfig.isDesktop;
     keybindings = {
-      "super + Return" = "alacritty";
+      "super + Return" = "kitty";
       "super + @space" = "rofi -show run";
       "super + shift + q" = "bspc quit";
       # focus node in direction
