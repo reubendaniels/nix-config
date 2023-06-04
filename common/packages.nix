@@ -38,7 +38,7 @@ with pkgs; [
   nodePackages.pnpm
   nodePackages."@tailwindcss/language-server"
   nodePackages.typescript-language-server
-  nodejs-16_x
+  nodejs-18_x
   pinentry
   ripgrep
   rye
