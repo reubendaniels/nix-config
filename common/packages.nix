@@ -41,7 +41,7 @@ with pkgs; [
   nodejs-18_x
   openssl
   pinentry
-  pkg-config
+  pkgconfig
   ripgrep
   rye
   rustup
