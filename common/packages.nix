@@ -40,6 +40,7 @@ with pkgs; [
   nodePackages.typescript-language-server
   nodejs-18_x
   pinentry
+  pkg-config
   ripgrep
   rye
   rustup
