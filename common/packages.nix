@@ -39,6 +39,7 @@ with pkgs; [
   nodePackages."@tailwindcss/language-server"
   nodePackages.typescript-language-server
   nodejs-18_x
+  openssl
   pinentry
   pkg-config
   ripgrep
