@@ -58,9 +58,11 @@ in
     ];
   };
 
-  # Sector42 CA
+  # Personal and work CAs
   security.pki.certificates = [
     (builtins.readFile ../common/config/sector42-ca.pem)
+    (builtins.readFile "${secrets}/work-root-ca-01.crt")
+    (builtins.readFile "${secrets}/work-root-ca-02.crt")
   ];
 
   launchd.daemons."nix-store-optimise".serviceConfig = {

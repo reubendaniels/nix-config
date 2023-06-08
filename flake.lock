@@ -69,11 +69,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1683537072,
-        "narHash": "sha256-xaXLlGLHPHRFdnNYNeQnwAEKw6bGJs8gWk8R+rFBm84=",
+        "lastModified": 1686189027,
+        "narHash": "sha256-iiB5lz79ybLCrKFVvYXIXs1VC368F8/aoIlQOSk2z5o=",
         "ref": "refs/heads/main",
-        "rev": "8acd7593e38ab832e371006b2a8b164554822893",
-        "revCount": 16,
+        "rev": "0622be846e807974123af4d5d2067e12ea235dcd",
+        "revCount": 17,
         "type": "git",
         "url": "ssh://git@github.com/leonbreedt/private.git"
       },
