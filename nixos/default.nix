@@ -1,4 +1,4 @@
-{ lib, config, inputs, pkgs, hostname, secrets, user, machineConfig, ... }:
+{ lib, config, inputs, pkgs, stable, hostname, secrets, user, machineConfig, ... }:
 
 let 
   keys = [
@@ -132,7 +132,7 @@ in
   services.unifi = {
     enable = machineConfig.isUnifiController;
     unifiPackage = pkgs.unifi7;
-    mongodbPackage = pkgs.mongodb-4_2;
+    mongodbPackage = stable.mongodb-4_2;
   };
 
   networking.firewall = {

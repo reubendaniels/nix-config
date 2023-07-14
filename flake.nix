@@ -5,8 +5,8 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/master";
     };
-    stable-darwin = {
-      url = "github:NixOS/nixpkgs/f30da2c2622736aecdccac893666ea23cad90f2d";
+    stable-nixos = {
+      url = "github:NixOS/nixpkgs/nixos-23.05";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,20 +22,14 @@
     };
   };
 
-  outputs = { self, darwin, home-manager, nixpkgs, stable-darwin, secrets, ... }@inputs: 
+  outputs = { self, darwin, home-manager, nixpkgs, stable-nixos, secrets, ... }@inputs: 
   let
     pkgConfig = {
       allowUnfree = true;
       allowBroken = true;
       allowInsecure = false;
       allowUnsupportedSystem = true;
-    };
-    overlay-stable-darwin = final: prev: {
-      stable = import stable-darwin {
-        system = "aarch64-darwin";
-        config = pkgConfig;
-      };
-    };
+    }; 
     defaultMachineConfig = {
       isPersonal = true;
       isDesktop = false;
@@ -44,6 +38,10 @@
       shouldBackupWithTarsnap = false;
       tarsnapDirectories = [ "/etc" "/root" ];
       tarsnapHealthCheckUUID = "";
+    };
+    stable = import inputs.stable-nixos {
+      system = "x86_64-linux";
+      config = pkgConfig;
     };
     hosts = {
       personal = {
@@ -71,7 +69,7 @@
       "${hosts.personal.laptop}" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ({ pkgs, ... }: { nixpkgs.overlays = [ overlay-stable-darwin overlay-jdk17 ]; })
+          ({ pkgs, ... }: { nixpkgs.overlays = [ overlay-jdk17 ]; })
           ./macos
         ];
         inputs = { inherit darwin home-manager nixpkgs secrets; };
@@ -87,7 +85,7 @@
       "${hosts.work.laptop}" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ({ pkgs, ... }: { nixpkgs.overlays = [ overlay-stable-darwin overlay-jdk17 ]; })
+          ({ pkgs, ... }: { nixpkgs.overlays = [ overlay-jdk17 ]; })
           ./macos
         ];
         inputs = { inherit darwin home-manager nixpkgs secrets; };
@@ -124,6 +122,7 @@
               secrets = secrets;
               user = users.personal; 
               hostname = hosts.personal.desktop; 
+              stable = stable;
               machineConfig = defaultMachineConfig // {
                 isDesktop = true;
                 enableDocker = true;
@@ -137,6 +136,7 @@
           secrets = secrets;
           user = users.personal; 
           hostname = hosts.personal.desktop; 
+          stable = stable;
           machineConfig = defaultMachineConfig // {
             isDesktop = true;
             enableDocker = true;
@@ -169,6 +169,7 @@
               secrets = secrets;
               user = users.personal;
               hostname = hosts.personal.controller;
+              stable = stable;
               machineConfig = defaultMachineConfig // {
                 isUnifiController = true;
                 shouldBackupWithTarsnap = true;
@@ -182,6 +183,7 @@
           secrets = secrets;
           user = users.personal;
           hostname = hosts.personal.controller;
+          stable = stable;
           machineConfig = defaultMachineConfig // {
             isUnifiController = true;
             shouldBackupWithTarsnap = true;
