@@ -62,6 +62,7 @@
     overlay-jdk17 = final: prev: {
       # Force packages with Java dependencies to use 17 (e.g. Maven)
       jdk = prev.jdk17;
+      jre = prev.jre17_minimal;
     };
   in
   {
@@ -105,6 +106,7 @@
         system = "x86_64-linux";
         modules = [
           ({ pkgs, ... }: { nixpkgs.overlays = [
+            overlay-jdk17
             (final: prev: {
               tarsnap-key = final.callPackage ./packages/tarsnap-key.nix {
                 secrets = secrets;
@@ -149,6 +151,7 @@
         system = "x86_64-linux";
         modules = [
           ({ pkgs, ... }: { nixpkgs.overlays = [
+            overlay-jdk17
             (final: prev: {
               tarsnap-key = final.callPackage ./packages/tarsnap-key.nix {
                 secrets = secrets;
