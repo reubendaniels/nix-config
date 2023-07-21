@@ -84,6 +84,10 @@ in
         condition = "gitdir:~/${workProjectDir}/";
       }
       {
+        path = "~/.config/git/work";
+        condition = "gitdir:/var/";
+      }
+      {
         path = "~/.config/git/personal";
         condition = "gitdir:/etc/nixos/";
       }
