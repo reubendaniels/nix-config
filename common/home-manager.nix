@@ -85,7 +85,7 @@ in
       }
       {
         path = "~/.config/git/work";
-        condition = "gitdir:/var/";
+        condition = "gitdir:private/var/";
       }
       {
         path = "~/.config/git/personal";
