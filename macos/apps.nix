@@ -6,7 +6,5 @@
 
 lib.mkIf machineConfig.isPersonal {
   "1blocker" = 1365531024;
-  "1password" = 1333542190;
-  "1password-for-safari" = 1569813296;
   "tailscale" = 1475387142;
 }
