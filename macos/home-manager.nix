@@ -20,10 +20,10 @@ in
     enable = true;
     entries = [
       { path = "/System/Cryptexes/App/System/Applications/Safari.app/"; }
-      { path = "/System/Applications/Messages.app/"; }
       { path = "${pkgs.wezterm}/Applications/WezTerm.app/"; }
-      { path = "/System/Applications/Photos.app/"; }
     ] ++ lib.optionals machineConfig.isPersonal [
+      { path = "/System/Applications/Messages.app/"; }
+      { path = "/System/Applications/Photos.app/"; }
       { path = "/Applications/Mimestream.app/"; }
     ];
   };
