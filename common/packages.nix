@@ -42,6 +42,7 @@ with pkgs; [
   openssl
   pinentry
   pkgconfig
+  pwgen
   ripgrep
   rye
   rustup
