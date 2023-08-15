@@ -57,6 +57,7 @@ with pkgs; [
   unzip
   vault
   wrk
+  xsv
   zig
   zls
   zip
