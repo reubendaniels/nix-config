@@ -99,7 +99,11 @@ in
   hardware.nvidia.modesetting.enable = machineConfig.isDesktop;
 
   # Better support for general peripherals
-  services.xserver.libinput.enable = machineConfig.isDesktop;
+  services.xserver.libinput = {
+    enable = machineConfig.isDesktop;
+    # macOS for lyfe
+    naturalScrolling = true;
+  };
 
   # Support Docker
   virtualisation.docker = {
