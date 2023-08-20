@@ -90,11 +90,13 @@ Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
    
 ### WSL
 
-1. Build the latest `main` branch of [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)
-   on an existing NixOS system:
+1. Clone this repository, and temporarily set `nativeSystemd` to `false` in `wsl/default.nix`.
+
+
+2. Build the latest `main` branch on an existing NixOS system:
 
    ```shell
-   nix build .#nixosConfigurations.mysystem.config.system.build.installer
+   nix build .#nixosConfigurations.<WSL-CONFIG-NAME>.config.system.build.installer
    ```
 
 3. This will produce a tarball in `./result/tarball/nixos-wsl-installer.tar.gz`,

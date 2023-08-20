@@ -10,7 +10,7 @@
 
     # Installer does not support native systemd yet, set to false when
     # building tarball.
-    nativeSystemd = true;
+    nativeSystemd = false;
 
     # Enable native Docker support
     docker-native.enable = true;
