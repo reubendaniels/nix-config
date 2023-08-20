@@ -68,3 +68,8 @@ lib.optionals ((machineConfig.isDesktop || !machineConfig.isPersonal) && !machin
   vscode
   google-chrome
 ]
+++
+lib.options machineConfig.isWSL [
+  # needed by some MS tooling
+  wget
+]
