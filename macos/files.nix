@@ -9,5 +9,7 @@ in
     then ../common/config/color-wave-2.jpg
     else ../common/config/color-wave-5.jpg;
 
+  "${xdg_configHome}/kitty/os.conf".source = ../common/config/kitty-macos;
+
   "${xdg_configHome}/ssl/certs/sector42-ca.pem".source = ../common/config/sector42-ca.pem;
 }

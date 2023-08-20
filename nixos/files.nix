@@ -6,5 +6,6 @@ let
 in
 {
   "${home}/.inputrc".source = ./config/inputrc;
+  "${xdg_configHome}/kitty/os.conf".source = ../common/config/kitty-linux;
   "${home}/.wallpaper".source = ../common/config/color-wave-1.jpg;
 }

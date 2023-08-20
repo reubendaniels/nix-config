@@ -1,6 +1,3 @@
-# List with kitty +list-fonts
-font_family SF Mono
-font_size 11
 
 cursor_blink_interval 	0
 window_padding_width 4
@@ -15,7 +12,6 @@ selection_background  #fffacd
 url_color             #0087bd
 
 confirm_os_window_close 0
-macos_thicken_font 0.75
 
 # black
 color0   #5d677a
@@ -48,3 +44,6 @@ color14  #56b6c2
 # white
 color7   #dcdfe4
 color15  #dcdfe4
+
+# OS-specific config
+include ${HOME}/.config/kitty/os.conf

@@ -102,7 +102,7 @@ in
   services.xserver.libinput = {
     enable = machineConfig.isDesktop;
     # macOS for lyfe
-    naturalScrolling = true;
+    touchpad.naturalScrolling = true;
   };
 
   # Support Docker

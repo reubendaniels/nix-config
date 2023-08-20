@@ -1,0 +1,5 @@
+# List with kitty +list-fonts
+font_family SF Mono
+font_size 11
+
+macos_thicken_font 0.75
