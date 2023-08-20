@@ -66,4 +66,5 @@ with pkgs; [
 lib.optionals (machineConfig.isDesktop || !machineConfig.isPersonal) [
   chromedriver
   vscode
+  google-chrome
 ]
