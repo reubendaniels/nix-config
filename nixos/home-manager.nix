@@ -89,7 +89,9 @@ in
       "super + @space" = "rofi -show run";
       "super + shift + q" = "bspc quit";
       # focus node in direction
-      "super + {_,shift + }{Left,Down,Up,Right}" = "bspc node -{f,s} {west,south,north,east}";
+      "super + {_,shift + }{Left,Down,Up,Right}" = "bspc node -{f,s} {west,south,north,east} --follow";
+      # move window between monitors
+      "super + alt + {Left,Right}" = "bspc node -m {prev,next} --follow";
       # switch desktops
       "super + 1" = "bspc desktop -f 1";
       "super + 2" = "bspc desktop -f 2";
