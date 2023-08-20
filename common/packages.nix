@@ -69,7 +69,7 @@ lib.optionals ((machineConfig.isDesktop || !machineConfig.isPersonal) && !machin
   google-chrome
 ]
 ++
-lib.options machineConfig.isWSL [
+lib.optionals machineConfig.isWSL [
   # needed by some MS tooling
   wget
 ]
