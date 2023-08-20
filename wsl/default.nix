@@ -7,6 +7,9 @@
     enable = true;
     defaultUser = "${user}";
     startMenuLaunchers = true;
+
+    # Installer does not support native systemd yet, set to false when
+    # building tarball.
     nativeSystemd = true;
 
     # Enable native Docker support
