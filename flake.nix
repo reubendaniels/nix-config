@@ -16,13 +16,17 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     secrets = {
       url = "git+ssh://git@github.com/leonbreedt/private.git";
       flake = false;
     };
   };
 
-  outputs = { self, darwin, home-manager, nixpkgs, stable-nixos, secrets, ... }@inputs: 
+  outputs = { self, nixpkgs, stable-nixos, home-manager, darwin, nixos-wsl, secrets, ... }@inputs: 
   let
     pkgConfig = {
       allowUnfree = true;
@@ -33,6 +37,7 @@
     defaultMachineConfig = {
       isPersonal = true;
       isDesktop = false;
+      isWSL = false;
       enableDocker = false;
       isUnifiController = false;
       shouldBackupWithTarsnap = false;
@@ -99,7 +104,7 @@
     };
 
     nixosConfigurations = {
-      # Ryzen 3900X desktop
+      # Ryzen 3900X desktop - Linux
       "${hosts.personal.desktop}" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -142,6 +147,53 @@
             enableDocker = true;
             shouldBackupWithTarsnap = true;
             tarsnapHealthCheckUUID = (builtins.readFile "${secrets}/personal-desktop-tarsnap-hc-uuid");
+          };
+        };
+      };
+
+      # Ryzen 3900X desktop - WSL
+      "${hosts.personal.desktop}-wsl" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ({ pkgs, ... }: { nixpkgs.overlays = [
+            overlay-jdk17
+            (final: prev: {
+              tarsnap-key = final.callPackage ./packages/tarsnap-key.nix {
+                secrets = secrets;
+                hostname = hosts.personal.desktop;
+              };
+            })
+          ]; })
+          ./nixos
+          ./hw/personal-desktop-wsl.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users."${users.personal}" = import ./nixos/home-manager.nix;
+            home-manager.extraSpecialArgs = {
+              secrets = secrets;
+              user = users.personal; 
+              hostname = hosts.personal.desktop; 
+              stable = stable;
+              machineConfig = defaultMachineConfig // {
+                isDesktop = true;
+                enableDocker = true;
+                isWSL = true;
+              };
+            };
+          }
+          ./wsl
+          inputs.nixos-wsl.nixosModules.wsl
+        ];
+        specialArgs = {
+          secrets = secrets;
+          user = users.personal; 
+          hostname = hosts.personal.desktop; 
+          stable = stable;
+          machineConfig = defaultMachineConfig // {
+            isDesktop = true;
+            enableDocker = true;
+            isWSL = true;
           };
         };
       };

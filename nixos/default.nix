@@ -21,7 +21,7 @@ in
   };
  
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = !machineConfig.isWSL;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -193,5 +193,5 @@ ${pkgs.tarsnap}/bin/tarsnap \
   };
 
 
-  system.stateVersion = "22.11"; # Don't change this
+  system.stateVersion = "23.11"; # Don't change this
 }
