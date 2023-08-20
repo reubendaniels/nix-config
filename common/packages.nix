@@ -63,7 +63,7 @@ with pkgs; [
   zip
 ]
 ++
-lib.optionals (machineConfig.isDesktop || !machineConfig.isPersonal) [
+lib.optionals ((machineConfig.isDesktop || !machineConfig.isPersonal) && !machineConfig.isWSL) [
   chromedriver
   vscode
   google-chrome
