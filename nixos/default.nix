@@ -184,7 +184,7 @@ ${pkgs.tarsnap}/bin/tarsnap \
 
   fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; lib.optionals machineConfig.isDesktop [
+    packages = with pkgs; lib.optionals machineConfig.isDesktop [
       (iosevka.override {
         privateBuildPlan = builtins.readFile ../common/config/iosevka-lb;
         set = "lb";
