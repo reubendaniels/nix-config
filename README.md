@@ -139,3 +139,18 @@ setup/retrieval of credentials from my private repo, you won't get access to it 
 
 If you remove the private repo input in `flake.nix` and the secrets references
 you can likely get it going.
+
+### Missing commands do not print derivations that resolve it
+
+If you run a command that is not installed, and you get an error like this:
+
+```shell
+DBI connect('dbname=/nix/var/nix/profiles/per-user/root/channels/nixos/programs.sqlite','',...) failed:
+unable to open database file at /run/current-system/sw/bin/command-not-found line 13.
+```
+
+Then you can likely resolve it by updating your Nix channels for the root user.
+
+```shell
+sudo nix-channel --update
+```
