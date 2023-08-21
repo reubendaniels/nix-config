@@ -154,3 +154,12 @@ Then you can likely resolve it by updating your Nix channels for the root user.
 ```shell
 sudo nix-channel --update
 ```
+
+### Rust completion doesn't work in VIM
+
+Since are using `rustup` instead of global native Nix Rust packages, make
+sure `rust-analyzer` is installed:
+
+```shell
+rustup component add rust-analyzer
+```
