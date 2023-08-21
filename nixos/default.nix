@@ -59,14 +59,19 @@ in
       password = builtins.readFile "${secrets}/smtp-password";
     };
   };
-  environment.etc = {
-    "aliases" = {
-      text = ''
-        root: leon@sector42.io
-        leon: leon@sector42.io
-        unifi: leon@sector42.io
-      '';
-      mode = "0644";
+  environment = {
+    etc = {
+      "aliases" = {
+        text = ''
+          root: leon@sector42.io
+          leon: leon@sector42.io
+          unifi: leon@sector42.io
+        '';
+        mode = "0644";
+      };
+    };
+    variables = {
+      GDK_SCALE = "2";
     };
   };
 
