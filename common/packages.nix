@@ -66,7 +66,6 @@ with pkgs; [
 lib.optionals ((machineConfig.isDesktop || !machineConfig.isPersonal) && !machineConfig.isWSL) [
   chromedriver
   vscode
-  google-chrome
 ]
 ++
 lib.optionals machineConfig.isWSL [
