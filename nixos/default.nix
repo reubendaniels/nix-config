@@ -17,7 +17,12 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings.allowed-users = [ "${user}" ];
+    settings = {
+      allowed-users = [ "${user}" ];
+      # below two lines for Flox
+      extra-trusted-substituters = [ "https://cache.floxdev.com" ];
+      extra-trusted-public-keys = [ "flox-store-public-0:8c/B+kjIaQ+BloCmNkRUKwaVPFWkriSAd0JJvuDu4F0=" ];
+    };
   };
  
   # Use the systemd-boot EFI boot loader.

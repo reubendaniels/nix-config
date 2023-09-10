@@ -17,7 +17,12 @@ in
   # Setup user, packages, programs
   nix = {
     package = pkgs.nixUnstable;
-    settings.trusted-users = [ "@admin" "${user}" ];
+    settings = {
+      trusted-users = [ "@admin" "${user}" ];
+      # below two lines for Flox
+      extra-trusted-substituters = [ "https://cache.floxdev.com" ];
+      extra-trusted-public-keys = [ "flox-store-public-0:8c/B+kjIaQ+BloCmNkRUKwaVPFWkriSAd0JJvuDu4F0=" ];
+    };
 
     gc = {
       user = "root";
