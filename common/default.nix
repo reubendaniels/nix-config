@@ -1,20 +1,25 @@
-{ config, pkgs, ...}:
+# Common configuration across systems
+
+{ pkgs, hostname, ... }:
 
 {
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowBroken = true;
-      allowInsecure = false;
-      allowUnsupportedSystem = true;
-    };
+  nix = {
+    # Use latest 'nix' CLI
+    package = pkgs.nixUnstable;
 
-    overlays =
-      # Apply each overlay found in the /overlays directory
-      let path = ../overlays; in with builtins;
-      map (n: import (path + ("/" + n)))
-          (filter (n: match ".*\\.nix" n != null ||
-                      pathExists (path + ("/" + n + "/default.nix")))
-                  (attrNames (readDir path)));
+    # Don't require --extra-experimental-features every time we
+    # want to use 'nix flake'
+    extraOptions = "experimental-features = nix-command flakes";
   };
+
+  # Ensure hostname is set system-wide.
+  networking.hostName = "${hostname}";
+
+  environment = {
+    # Make Fish shell available in /etc/shells
+    shells = [ pkgs.fish ];
+  };
+
+  # Set up common programs globally
+  programs = import ./programs.nix;
 }

@@ -1,28 +1,25 @@
-# Packages that we want installed on every machine.
+# Common packages installed on all systems
 
-{ lib, pkgs, machineConfig }:
+{ pkgs }:
 
 with pkgs; [
   awscli2
   bat
   bun
+  cascadia-code
   cloudfoundry-cli
   curl
-  difftastic
   deno
+  difftastic
   du-dust
-  exa
-  emacs
+  eza
   fd
   fish
   flyctl
-  font-awesome
   fzf
   gh
   git-lfs
   gnupg
-  google-cloud-sdk
-  google-java-format
   go
   gopls
   htop
@@ -35,18 +32,15 @@ with pkgs; [
   maven
   neofetch
   nmap
-  nodePackages.pnpm
   nodePackages."@tailwindcss/language-server"
   nodePackages.typescript-language-server
   nodejs-18_x
   openssl
   pinentry
-  pkgconfig
+  pkg-config
   pwgen
   ripgrep
-  rye
   rustup
-  cascadia-code
   sf-mono
   step-cli
   sqlite
@@ -61,14 +55,4 @@ with pkgs; [
   zig
   zls
   zip
-]
-++
-lib.optionals ((machineConfig.isDesktop || !machineConfig.isPersonal) && !machineConfig.isWSL) [
-  chromedriver
-  vscode
-]
-++
-lib.optionals machineConfig.isWSL [
-  # needed by some MS tooling
-  wget
 ]

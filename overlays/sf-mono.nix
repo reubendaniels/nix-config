@@ -1,3 +1,3 @@
 self: super: {
-  sf-mono = self.callPackage ../packages/sf-mono.nix {} ;
+  sf-mono = self.callPackage ../pkgs/sf-mono.nix {} ;
 }
