@@ -17,6 +17,7 @@
     "postico"
     "postgres-unofficial"
     "zoom"
+    "1password"
   ] ++ lib.optionals isPersonal [
     "mimestream"
     "vlc"
