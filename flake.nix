@@ -35,6 +35,11 @@
         hostname = "athena";
         user = "leon";
       };
+      KHW90GQLQF = lib.mkDarwin {
+        hostname = "KHW90GQLQF";
+        user = "i070279";
+        isPersonal = false;
+      };
     };
 
     nixosConfigurations = {
