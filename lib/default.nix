@@ -39,9 +39,9 @@ rec {
         {
           # System packages
           environment.systemPackages =
-            (import ../common/packages.nix { inherit pkgs; })
+            (import ../common/packages.nix { inherit pkgs isPersonal; })
             ++
-            (import ../macos/packages.nix { inherit pkgs; });
+            (import ../macos/packages.nix { inherit pkgs isPersonal; });
 
           # Base nix-darwin user configuration, don't specify anything here
           # other than name and home dir, as nix-darwin will ignore extra

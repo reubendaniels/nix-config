@@ -1,6 +1,6 @@
 # Common packages installed on all systems
 
-{ pkgs }:
+{ pkgs, isPersonal }:
 
 with pkgs; [
   awscli2
@@ -55,4 +55,6 @@ with pkgs; [
   zig
   zls
   zip
+] ++ lib.optionals (!isPersonal) [
+  chromedriver
 ]

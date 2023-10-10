@@ -1,5 +1,5 @@
 # macOS-specific packages
-{ pkgs }:
+{ pkgs, ... }:
 
 with pkgs; [
 ]
