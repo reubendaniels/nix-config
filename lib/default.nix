@@ -63,10 +63,10 @@ rec {
             useUserPackages = false;
 
             users.${user} = pkgs.lib.recursiveUpdate
-              (import ../common/home.nix { inherit pkgs configdir; })
+              (import ../common/home.nix { inherit secrets pkgs configdir; })
               (
                 pkgs.lib.recursiveUpdate
-                  (import ../macos/home.nix { inherit pkgs configdir; })
+                  (import ../macos/home.nix { inherit secrets pkgs configdir; })
                   {
                     home.file = pkgs.lib.recursiveUpdate
                       (import ../common/files.nix { inherit secrets homedir configdir; })

@@ -1,5 +1,5 @@
 # Common Home Manager configuration
-{ pkgs, ... }:
+{ pkgs, secrets, ... }:
 
 {
   home = {
@@ -39,7 +39,7 @@
           fish_add_path "/Applications/Postgres.app/Contents/Versions/latest/bin"
         end
 
-        set -gx CDPATH . $HOME/Source $HOME/source
+        set -gx CDPATH . $HOME/${secrets.work-project-dir} $HOME/Source $HOME/source
 
         alias kc kubectl
         alias cat "bat -p"
