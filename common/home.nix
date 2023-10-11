@@ -83,6 +83,14 @@
           path = "~/.config/git/personal";
           condition = "gitdir:/etc/nixos/";
         }
+        {
+          path = "~/.config/git/work";
+          condition = "gitdir:~/${secrets.work-project-dir}/";
+        }
+        {
+          path = "~/.config/git/work";
+          condition = "gitdir:private/var/";
+        }
       ];
       extraConfig = {
         branch.autosetuprebase = "always";
