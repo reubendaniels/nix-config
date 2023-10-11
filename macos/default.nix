@@ -6,6 +6,9 @@
   # Enable the Nix daemon for maintenance activities.
   services.nix-daemon.enable = true;
 
+  # Enable Redis on work machines.
+  services.redis.enable = !isPersonal;
+
   # Disable NIX_PATH validation checks, we are using flakes.
   system.checks.verifyNixPath = false;
 
