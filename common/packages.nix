@@ -41,6 +41,7 @@ with pkgs; [
   pwgen
   ripgrep
   rustup
+  rust-cbindgen
   sf-mono
   step-cli
   sqlite
