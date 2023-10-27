@@ -42,6 +42,7 @@ with pkgs; [
   ripgrep
   rustup
   rust-cbindgen
+  shellcheck
   sf-mono
   step-cli
   sqlite
