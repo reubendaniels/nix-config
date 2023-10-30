@@ -7,7 +7,7 @@ end
 
 -- fonts
 
-config.font = wezterm.font('SF Mono', { weight = 'DemiBold' })
+config.font = wezterm.font('Geist Mono', { weight = 'Medium' })
 config.font_size = 11.0
 config.initial_cols = 110
 config.initial_rows = 35
