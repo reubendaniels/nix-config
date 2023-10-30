@@ -17,6 +17,7 @@ with pkgs; [
   fish
   flyctl
   fzf
+  geist-mono
   gh
   git-lfs
   gnupg
@@ -59,4 +60,5 @@ with pkgs; [
   zip
 ] ++ lib.optionals (!isPersonal) [
   chromedriver
+  vscode
 ]
