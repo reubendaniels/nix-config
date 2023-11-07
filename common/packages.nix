@@ -59,6 +59,7 @@ with pkgs; [
   zls
   zip
 ] ++ lib.optionals (!isPersonal) [
-  chromedriver
+  # from overlay
+  chromedriver-latest
   vscode
 ]
