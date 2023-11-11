@@ -15,6 +15,7 @@ config.font_rules = {
     font = wezterm.font("Geist Mono", {weight = 'DemiBold', stretch="Normal", style="Normal"})
   }
 }
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.initial_cols = 110
 config.initial_rows = 35
 
