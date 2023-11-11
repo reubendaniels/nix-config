@@ -25,6 +25,7 @@ with pkgs; [
   gopls
   htop
   inetutils
+  intel-one-mono
   jdk17
   jetbrains-mono
   jq
