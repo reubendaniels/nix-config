@@ -7,12 +7,12 @@ end
 
 -- fonts
 
-config.font = wezterm.font("Geist Mono", {weight="DemiBold", stretch="Normal", style="Normal"})
+config.font = wezterm.font("IntelOne Mono", {weight="Medium", stretch="Normal", style="Normal"})
 config.font_size = 11.0
 config.font_rules = {
   {
     intensity = "Bold",
-    font = wezterm.font("Geist Mono", {weight = 'DemiBold', stretch="Normal", style="Normal"})
+    font = wezterm.font("IntelOne Mono", {weight="Medium", stretch="Normal", style="Normal"})
   }
 }
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
