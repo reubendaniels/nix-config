@@ -38,6 +38,7 @@
     fonts = with pkgs; [
       sf-mono
       geist-mono
+      intel-one-mono
       (iosevka.override {
         privateBuildPlan = builtins.readFile ../common/config/iosevka-lb;
         set = "lb";
