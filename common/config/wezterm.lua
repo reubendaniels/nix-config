@@ -8,7 +8,7 @@ end
 -- fonts
 
 config.font = wezterm.font("IntelOne Mono", {weight="Medium"})
-config.font_size = 13.0
+config.font_size = 12.0
 config.font_rules = {
   {
     intensity = "Bold",
