@@ -36,6 +36,7 @@
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
+      coding-fonts
       sf-mono
       geist-mono
       intel-one-mono

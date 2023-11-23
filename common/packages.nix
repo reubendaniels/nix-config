@@ -7,6 +7,7 @@ with pkgs; [
   bat
   bun
   cascadia-code
+  coding-fonts
   cloudfoundry-cli
   curl
   deno
