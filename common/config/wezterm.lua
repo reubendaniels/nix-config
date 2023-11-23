@@ -7,12 +7,12 @@ end
 
 -- fonts
 
-config.font = wezterm.font("Berkeley Mono", {weight="Regular", stretch="Normal", style="Normal"})
+config.font = wezterm.font("Berkeley Mono", {weight="Bold"})
 config.font_size = 13.0
 config.font_rules = {
   {
     intensity = "Bold",
-    font = wezterm.font("Berkeley Mono", {weight="Regular", stretch="Normal", style="Normal"})
+    font = wezterm.font("Berkeley Mono", {weight="Bold"})
   }
 }
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
