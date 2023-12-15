@@ -58,6 +58,7 @@ with pkgs; [
   vault
   wrk
   xsv
+  xh
   zig
   zls
   zip
