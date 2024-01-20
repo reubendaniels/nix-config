@@ -1,6 +1,6 @@
 # Nix configuration
 
-Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
+Inspired by [Leon Breedt's](https://github.com/leonbreedt/nix-config) repo.
 
 ## Bootstrapping
 
