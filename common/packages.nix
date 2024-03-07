@@ -41,6 +41,7 @@ with pkgs; [
   openssl
   pinentry
   pkg-config
+  protobuf
   pwgen
   ripgrep
   rustup
