@@ -44,6 +44,7 @@ with pkgs; [
   protobuf
   pwgen
   ripgrep
+  ruby
   rustup
   rust-cbindgen
   shellcheck
