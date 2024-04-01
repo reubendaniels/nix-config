@@ -45,6 +45,7 @@ with pkgs; [
   pwgen
   ripgrep
   ruby_3_3
+  rubyPackages_3_3.solargraph
   rustup
   rust-cbindgen
   shellcheck
