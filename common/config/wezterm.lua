@@ -7,12 +7,12 @@ end
 
 -- fonts
 
-config.font = wezterm.font("IntelOne Mono", {weight="Medium"})
-config.font_size = 12.0
+config.font = wezterm.font("IosevkaLB", {weight="Medium"})
+config.font_size = 15.0
 config.font_rules = {
   {
     intensity = "Bold",
-    font = wezterm.font("IntelOne Mono", {weight="Bold"})
+    font = wezterm.font("IosevkaLB", {weight="Bold"})
   }
 }
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }

@@ -1,12 +1,12 @@
-[buildPlans.iosevka-lb]
+[buildPlans.Iosevkalb]
 family = "IosevkaLB"
 spacing = "term"
 serifs = "sans"
-no-cv-ss = true
-no-ligation = false
+noCvSs = true
+noLigation = false
 
-[buildPlans.iosevka-lb.variants]
+[buildPlans.Iosevkalb.variants]
 inherits = "ss14"
 
-[buildPlans.iosevka-lb.variants.design]
+[buildPlans.Iosevkalb.variants.design]
 underscore = "low"

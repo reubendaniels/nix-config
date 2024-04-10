@@ -39,7 +39,6 @@ with pkgs; [
   nodePackages.typescript-language-server
   nodejs-18_x
   openssl
-  pinentry
   pkg-config
   protobuf
   pwgen
@@ -69,4 +68,6 @@ with pkgs; [
   # from overlay
   chromedriver-latest
   vscode
+] ++ lib.optionals isPersonal [
+  pinentry_mac
 ]

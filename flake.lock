@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1695686713,
-        "narHash": "sha256-rJATx5B/nwlBpt7CJUf85LV27qWPbul5UVV8fu6ABPg=",
+        "lastModified": 1711763326,
+        "narHash": "sha256-sXcesZWKXFlEQ8oyGHnfk4xc9f2Ip0X/+YZOq3sKviI=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "e236a1e598a9a59265897948ac9874c364b9555f",
+        "rev": "36524adc31566655f2f4d55ad6b875fb5c1a4083",
         "type": "github"
       },
       "original": {
@@ -44,11 +44,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1707778260,
-        "narHash": "sha256-1i6rNB3mX/AudWhs3tfYuFjukjoQXeWQ4HGGpTFla6U=",
+        "lastModified": 1712633158,
+        "narHash": "sha256-oVH0mwdfPDxNvD/Tj/8SM1rr2SoPA5nDtLi55/1O388=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "897df4cc4d21cefc2b3b298fa75b5a1ab500ebd5",
+        "rev": "f3ee2a75d473ff9577e9e1b79456f12c08d14858",
         "type": "github"
       },
       "original": {
@@ -69,11 +69,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1700701951,
-        "narHash": "sha256-O9RMce+eSrW0fJlyRu73OBswThrN2QGxIxdxu5zqICA=",
+        "lastModified": 1700702791,
+        "narHash": "sha256-vATefaXUWT2o9lD7FyUIR9FWCpyKPao45GXjTBQBVXY=",
         "ref": "refs/heads/main",
-        "rev": "58796dc379b1f27a608a24d2fa4a386be9380718",
-        "revCount": 20,
+        "rev": "aa557b87f7b90eb3fd54ba770ec1749abb0c6b5b",
+        "revCount": 21,
         "type": "git",
         "url": "ssh://git@github.com/leonbreedt/secrets.git"
       },
