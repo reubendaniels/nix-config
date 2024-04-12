@@ -8,7 +8,7 @@ end
 -- fonts
 
 config.font = wezterm.font("IosevkaLB", {weight="DemiBold"})
-config.font_size = 15.0
+config.font_size = 14.0
 config.font_rules = {
   {
     intensity = "Bold",
