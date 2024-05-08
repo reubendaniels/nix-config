@@ -20,6 +20,7 @@ with pkgs; [
   fzf
   geist-mono
   gh
+  graphviz
   git-lfs
   gnupg
   go
