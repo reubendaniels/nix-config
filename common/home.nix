@@ -42,6 +42,9 @@
 
         set -gx CDPATH . $HOME/${secrets.work-project-dir} $HOME/Source $HOME/source
 
+        # disable cursor blink on WSL
+        printf '\e[?12l'
+
         alias kc kubectl
         alias cat "bat -p"
         alias less "bat -p"
