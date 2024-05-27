@@ -19,6 +19,43 @@ Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
 5. Whenever you make configuration changes, run `./rebuild`. If any files are
    reported as being in the way, move them out of the way and re-run.
 
+### WSL
+
+1. Install and start up NixOS following the instructions in the 
+   [NixOS-WSL](https://github.com/nix-community/NixOS-WSL?tab=readme-ov-file)
+   repository.
+
+2. Run `sudo nix-channel --update` and `sudo nixos-rebuild switch` to set up the base system.
+
+3. Run `sudo nix-shell -p git` to enter a shell with `git` installed.
+
+4. Clone this repository to `/etc/nixos/nixos-config`. 
+
+5. Ensure the `root` user has the SSH public key for cloning the secret repository 
+   referenced by the `flake.nix`, it should be put in `/root/.ssh` with appropriate
+   permissions. Run `ssh git@github.com` at least once, and save the GitHub SSH key
+   (needed to avoid the `nixos-install` command hanging waiting for user input when
+   cloning the secrets repo).
+
+6. Change to `/etc/nixos/nixos-config` and run `env FLAKE=<NAME> ./rebuild` to do the initial build.
+   Subsequent builds will not need you to specify the hostname.
+
+7. To change the default user from being `root` (after failing to use `nixos`), run:
+
+   ```sh
+   sudo -E /run/current-system/sw/bin/nixos-rebuild boot --flake .#<NAME>
+   ```
+
+   Do **not** run `./rebuild` or `nixos-rebuild switch after this!
+
+8. Then exit the NixOS shell, and run `wsl -t NixOS` to stop it from running.
+
+9. Run `wsl -d NixOS --user root exit`.
+
+10. Stop the distribution again with `wsl -t NixOS`. Now when you next start it,
+    it will use the user created by the flake.
+
+
 ### NixOS
 
 **TODO:** Below instructions are outdated and not adapted for complete flake rewrite.
@@ -63,45 +100,6 @@ Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
     `<SYSTEM>` is the name of the system in `flake.nix`. This will run `nixos-rebuild`
     in flake mode, and switch to the built configuration afterwards.
    
-### WSL
-
-**TODO:** Below instructions are outdated and not adapted for complete flake rewrite.
-
-1. Clone this repository on an existing NixOS system, and ensure
-   `nativeSystemd` is set to `false` in `wsl/default.nix`.
-
-3. Build the latest `main` branch on an existing NixOS system:
-
-   ```shell
-   nix build .#nixosConfigurations.<WSL-CONFIG-NAME>.config.system.build.installer
-   ```
-
-4. This will produce a tarball in `./result/tarball/nixos-wsl-installer.tar.gz`,
-   copy it somewhere (e.g USB).
-
-5. Import the NixOS distribution tarball into the appropriate location (where you want
-   `.\NixOS\` to be located, e.g. on a data drive:
-
-   ```shell
-   wsl --import NixOS .\NixOS\ nixos-wsl-installer.tar.gz --version 2
-   ```
-
-6. Launch the distribution, after it is finished it should launch the shell
-   for the user in your configuration:
-
-   ```shell
-   wsl -d NixOS
-   ```
-
-7. Clone this repository to `/etc/nixos/nixos-config`:
-
-   ```shell
-   sudo mkdir /etc/nixos
-   sudo git clone https://github.com/leonbreedt/nixos-config.git /etc/nixos/nixos-config
-   ```
-
-8. Change to `/etc/nixos/nixos-config` and run `./rebuild` to do the initial build.
-
 ## Using
 
 Whenever you make changes to the configuration, just run `./rebuild` in the cloned
