@@ -22,9 +22,7 @@ nixos() {
   system="nixosConfigurations.$FLAKE.system"
 
   echo "rebuilding: on NixOS"
-  # --install-bootloader is a workaround for https://github.com/NixOS/nixpkgs/issues/223579,
-  # remove it once that bug is fixed
-  sudo -E /run/current-system/sw/bin/nixos-rebuild switch --flake "${FLAKE_DIR}#$FLAKE" --install-bootloader $@
+  sudo -E /run/current-system/sw/bin/nixos-rebuild switch --flake "${FLAKE_DIR}#$FLAKE" --impure $@
 }
 
 wsl() {
@@ -33,7 +31,7 @@ wsl() {
   system="nixosConfigurations.$FLAKE.system"
 
   echo "rebuilding: on WSL"
-  sudo -E /run/current-system/sw/bin/nixos-rebuild switch --flake "${FLAKE_DIR}#$FLAKE" $@
+  /run/wrappers/bin/sudo -E /run/current-system/sw/bin/nixos-rebuild switch --flake "${FLAKE_DIR}#$FLAKE" --impure $@
 }
 
 if [ "$(uname)" == "Darwin" ]; then

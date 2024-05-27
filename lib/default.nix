@@ -61,7 +61,6 @@ rec {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = false;
-
             users.${user} = pkgs.lib.recursiveUpdate
               (import ../common/home.nix { inherit secrets pkgs configdir isPersonal; })
               (
@@ -99,9 +98,27 @@ rec {
         ../common
         ../nixos
         ../wsl
-        nixos-wsl.nixosModules.wsl
 
-        home-manager.nixosModules.home-manager {
+        inputs.nixos-wsl.nixosModules.wsl
+        inputs.home-manager.nixosModules.home-manager
+
+        {
+          # System packages
+          environment.systemPackages =
+            (import ../common/packages.nix { inherit pkgs isPersonal; })
+            ++
+            (import ../nixos/packages.nix { inherit pkgs isPersonal; });
+
+          # Standard nixOS managed user configuration
+          users.users.${user} = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" "docker" ];
+            name = user;
+            home = homedir;
+            shell = pkgs.fish;
+	    openssh.authorizedKeys.keys = [ secrets.ssh-authorized-key ];
+          };
+
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = false;
@@ -119,6 +136,6 @@ rec {
               );
           };
         }
-      ]
+      ];
     };
 }

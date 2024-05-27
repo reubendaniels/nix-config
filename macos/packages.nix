@@ -1,5 +1,7 @@
 # macOS-specific packages
-{ pkgs, ... }:
+{ pkgs, isPersonal, ... }:
 
 with pkgs; [
+] ++ lib.optionals isPersonal [
+  pinentry_mac
 ]

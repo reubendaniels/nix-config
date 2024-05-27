@@ -69,6 +69,4 @@ with pkgs; [
   # from overlay
   chromedriver-latest
   vscode
-] ++ lib.optionals isPersonal [
-  pinentry_mac
 ]
