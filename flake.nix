@@ -20,6 +20,10 @@
       url = "git+ssh://git@github.com/leonbreedt/secrets.git";
       flake = false;
     };
+
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+    };
   };
 
   outputs = {nixpkgs, nix-darwin, secrets, ...}@inputs: 
