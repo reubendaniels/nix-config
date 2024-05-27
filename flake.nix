@@ -47,6 +47,10 @@
     };
 
     nixosConfigurations = {
+      galactica = lib.mkWsl {
+        hostname = "galactica";
+        user = "leon";
+      };
     };
   };
 }

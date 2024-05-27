@@ -1,3 +1,4 @@
+# macOS-specific managed home directory files
 { configdir, ... }:
 
 {

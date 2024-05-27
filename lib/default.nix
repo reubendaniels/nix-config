@@ -77,4 +77,48 @@ rec {
         }
       ];
     };
+
+
+    # Builder for a WSL system
+    mkWsl = { hostname, system ? "x86_64-linux", user, isPersonal ? true }:
+    let
+      pkgs = import inputs.nixpkgs { inherit system overlays; };
+      secrets = secretsAsAttrSet "${inputs.secrets}";
+      homedir = "/home/${user}";
+      configdir = "${homedir}/.config";
+    in
+    # maybe nixpkgs-wsl locked to 2311 if latest not compatible with nixos-wsl
+    inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      specialArgs = {
+        inherit pkgs hostname system user isPersonal homedir configdir secrets;
+      };
+
+      modules = [
+        ../common
+        ../nixos
+        ../wsl
+        nixos-wsl.nixosModules.wsl
+
+        home-manager.nixosModules.home-manager {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = false;
+
+            users.${user} = pkgs.lib.recursiveUpdate
+              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal; })
+              (
+                pkgs.lib.recursiveUpdate
+                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal; })
+                  {
+                    home.file = pkgs.lib.recursiveUpdate
+                      (import ../common/files.nix { inherit secrets homedir configdir; })
+                      (import ../nixos/files.nix { inherit secrets homedir configdir; });
+                  }
+              );
+          };
+        }
+      ]
+    };
 }
