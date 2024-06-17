@@ -1,8 +1,13 @@
 # Nix configuration
 
-Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
+Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo. 
+
+Lets you have 99% the same command-line tools and configuration across macOS, Linux (nixOS)
+and Windows (WSL).
 
 ## Bootstrapping
+
+You need to do this only once for a new machine.
 
 ### macOS
 
@@ -46,7 +51,7 @@ Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
    sudo -E /run/current-system/sw/bin/nixos-rebuild boot --flake .#<NAME>
    ```
 
-   Do **not** run `./rebuild` or `nixos-rebuild switch after this!
+   Do **not** run `./rebuild` or `nixos-rebuild switch` after this!
 
 8. Then exit the NixOS shell, and run `wsl -t NixOS` to stop it from running.
 
