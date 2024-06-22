@@ -43,6 +43,7 @@ with pkgs; [
   pkg-config
   protobuf
   pwgen
+  python3Full
   ripgrep
   ruby_3_3
   rubyPackages_3_3.solargraph
