@@ -36,6 +36,7 @@ with pkgs; [
   maven
   neofetch
   nmap
+  nodePackages."@angular/cli"
   nodePackages."@tailwindcss/language-server"
   nodePackages.typescript-language-server
   nodejs-18_x
