@@ -43,7 +43,7 @@ with pkgs; [
   openssl
   pkg-config
   protobuf
-  python312Full
+  python311Full
   pwgen
   ripgrep
   ruby_3_3
