@@ -79,7 +79,7 @@ rec {
 
 
     # Builder for a WSL system
-    mkWsl = { hostname, system ? "x86_64-linux", user, isPersonal ? true }:
+    mkWsl = { hostname, system ? "x86_64-linux", user, isPersonal ? true, hasGpu ? false }:
     let
       pkgs = import inputs.nixpkgs { inherit system overlays; };
       secrets = secretsAsAttrSet "${inputs.secrets}";
@@ -91,13 +91,14 @@ rec {
       inherit system;
 
       specialArgs = {
-        inherit pkgs hostname system user isPersonal homedir configdir secrets;
+        inherit pkgs hostname system user isPersonal hasGpu homedir configdir secrets;
       };
 
       modules = [
         ../common
         ../nixos
         ../wsl
+        ../hw/${hostname}.nix
 
         inputs.nixos-wsl.nixosModules.wsl
         inputs.home-manager.nixosModules.home-manager

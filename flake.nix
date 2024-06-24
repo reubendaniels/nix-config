@@ -50,6 +50,7 @@
       galactica = lib.mkWsl {
         hostname = "galactica";
         user = "leon";
+        hasGpu = true;
       };
     };
   };
