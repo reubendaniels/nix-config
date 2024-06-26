@@ -47,7 +47,13 @@
     };
 
     nixosConfigurations = {
-      galactica = lib.mkWsl {
+      galactica-wsl = lib.mkWsl {
+        hostname = "galactica";
+        user = "leon";
+        hasGpu = true;
+      };
+
+      galactica = lib.mkNixos {
         hostname = "galactica";
         user = "leon";
         hasGpu = true;

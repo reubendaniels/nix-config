@@ -22,7 +22,7 @@ nixos() {
   system="nixosConfigurations.$FLAKE.system"
 
   echo "rebuilding: on NixOS"
-  sudo -E /run/current-system/sw/bin/nixos-rebuild switch --flake "${FLAKE_DIR}#$FLAKE" --impure $@
+  /run/wrappers/bin/sudo -E /run/current-system/sw/bin/nixos-rebuild switch --flake "${FLAKE_DIR}#$FLAKE" --impure $@
 }
 
 wsl() {

@@ -86,7 +86,6 @@ rec {
       homedir = "/home/${user}";
       configdir = "${homedir}/.config";
     in
-    # maybe nixpkgs-wsl locked to 2311 if latest not compatible with nixos-wsl
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
@@ -101,6 +100,65 @@ rec {
         ../hw/${hostname}.nix
 
         inputs.nixos-wsl.nixosModules.wsl
+        inputs.home-manager.nixosModules.home-manager
+
+        {
+          # System packages
+          environment.systemPackages =
+            (import ../common/packages.nix { inherit pkgs isPersonal; })
+            ++
+            (import ../nixos/packages.nix { inherit pkgs isPersonal; });
+
+          # Standard nixOS managed user configuration
+          users.users.${user} = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" "docker" ];
+            name = user;
+            home = homedir;
+            shell = pkgs.fish;
+	    openssh.authorizedKeys.keys = [ secrets.ssh-authorized-key ];
+          };
+
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = false;
+
+            users.${user} = pkgs.lib.recursiveUpdate
+              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal; })
+              (
+                pkgs.lib.recursiveUpdate
+                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal; })
+                  {
+                    home.file = pkgs.lib.recursiveUpdate
+                      (import ../common/files.nix { inherit secrets homedir configdir; })
+                      (import ../nixos/files.nix { inherit secrets homedir configdir; });
+                  }
+              );
+          };
+        }
+      ];
+    };
+
+    # Builder for a NixOS system
+    mkNixos = { hostname, system ? "x86_64-linux", user, isPersonal ? true, hasGpu ? false }:
+    let
+      pkgs = import inputs.nixpkgs { inherit system overlays; };
+      secrets = secretsAsAttrSet "${inputs.secrets}";
+      homedir = "/home/${user}";
+      configdir = "${homedir}/.config";
+    in
+    inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      specialArgs = {
+        inherit pkgs hostname system user isPersonal hasGpu homedir configdir secrets;
+      };
+
+      modules = [
+        ../common
+        ../nixos
+        ../hw/${hostname}.nix
+
         inputs.home-manager.nixosModules.home-manager
 
         {
