@@ -9,14 +9,6 @@
     settings.allowed-users = [ "${user}" ];
   };
 
-  # Use the systemd-boot EFI boot loader.
-
-  # TODO: make WSL parameterizable, disable this on WSL.
-  # boot.loader.systemd-boot.enable = !wsl.enable;
-
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   time.timeZone = "Pacific/Auckland";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
