@@ -97,7 +97,7 @@ rec {
         ../common
         ../nixos
         ../wsl
-        ../hw/${hostname}.nix
+        ../hw/${hostname}-wsl.nix
 
         inputs.nixos-wsl.nixosModules.wsl
         inputs.home-manager.nixosModules.home-manager
