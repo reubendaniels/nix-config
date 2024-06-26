@@ -3,7 +3,7 @@
 
 {
   home = {
-    stateVersion = "23.05";
+    stateVersion = "24.05";
 
     sessionVariables = {
       TERM = "xterm-256color";
