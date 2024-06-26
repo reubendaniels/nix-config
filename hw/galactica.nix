@@ -29,5 +29,9 @@
   networking.interfaces.eno1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnsupportedSystem = true;
+
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
