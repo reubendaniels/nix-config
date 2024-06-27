@@ -26,7 +26,7 @@
     };
   };
 
-  outputs = {nixpkgs, nix-darwin, secrets, ...}@inputs: 
+  outputs = {nixpkgs, nix-darwin, secrets, ...}@inputs:
   let
     lib = import ./lib {
       inherit inputs;

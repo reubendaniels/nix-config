@@ -77,7 +77,6 @@ rec {
       ];
     };
 
-
     # Builder for a WSL system
     mkWsl = { hostname, system ? "x86_64-linux", user, isPersonal ? true, hasGpu ? false }:
     let
@@ -85,12 +84,13 @@ rec {
       secrets = secretsAsAttrSet "${inputs.secrets}";
       homedir = "/home/${user}";
       configdir = "${homedir}/.config";
+      isWsl = true;
     in
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
       specialArgs = {
-        inherit pkgs hostname system user isPersonal hasGpu homedir configdir secrets;
+        inherit pkgs hostname system user isPersonal hasGpu homedir configdir secrets isWsl;
       };
 
       modules = [
@@ -105,9 +105,9 @@ rec {
         {
           # System packages
           environment.systemPackages =
-            (import ../common/packages.nix { inherit pkgs isPersonal; })
+            (import ../common/packages.nix { inherit pkgs isPersonal isWsl; })
             ++
-            (import ../nixos/packages.nix { inherit pkgs isPersonal; });
+            (import ../nixos/packages.nix { inherit pkgs isPersonal isWsl; });
 
           # Standard nixOS managed user configuration
           users.users.${user} = {
@@ -116,7 +116,7 @@ rec {
             name = user;
             home = homedir;
             shell = pkgs.fish;
-	    openssh.authorizedKeys.keys = [ secrets.ssh-authorized-key ];
+	        openssh.authorizedKeys.keys = [ secrets.ssh-authorized-key ];
           };
 
           home-manager = {
@@ -124,14 +124,14 @@ rec {
             useUserPackages = false;
 
             users.${user} = pkgs.lib.recursiveUpdate
-              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal; })
+              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal isWsl; })
               (
                 pkgs.lib.recursiveUpdate
-                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal; })
+                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal isWsl; })
                   {
                     home.file = pkgs.lib.recursiveUpdate
-                      (import ../common/files.nix { inherit secrets homedir configdir; })
-                      (import ../nixos/files.nix { inherit secrets homedir configdir; });
+                      (import ../common/files.nix { inherit secrets homedir configdir isWsl; })
+                      (import ../nixos/files.nix { inherit secrets homedir configdir isWsl; });
                   }
               );
           };
@@ -146,12 +146,13 @@ rec {
       secrets = secretsAsAttrSet "${inputs.secrets}";
       homedir = "/home/${user}";
       configdir = "${homedir}/.config";
+      isWsl = false;
     in
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
       specialArgs = {
-        inherit pkgs hostname system user isPersonal hasGpu homedir configdir secrets;
+        inherit pkgs hostname system user isPersonal hasGpu homedir configdir secrets isWsl;
       };
 
       modules = [
@@ -164,9 +165,9 @@ rec {
         {
           # System packages
           environment.systemPackages =
-            (import ../common/packages.nix { inherit pkgs isPersonal; })
+            (import ../common/packages.nix { inherit pkgs isPersonal isWsl; })
             ++
-            (import ../nixos/packages.nix { inherit pkgs isPersonal; });
+            (import ../nixos/packages.nix { inherit pkgs isPersonal isWsl; });
 
           # Standard nixOS managed user configuration
           users.users.${user} = {
@@ -183,14 +184,14 @@ rec {
             useUserPackages = false;
 
             users.${user} = pkgs.lib.recursiveUpdate
-              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal; })
+              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal isWsl; })
               (
                 pkgs.lib.recursiveUpdate
-                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal; })
+                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal isWsl; })
                   {
                     home.file = pkgs.lib.recursiveUpdate
-                      (import ../common/files.nix { inherit secrets homedir configdir; })
-                      (import ../nixos/files.nix { inherit secrets homedir configdir; });
+                      (import ../common/files.nix { inherit secrets homedir configdir isWsl; })
+                      (import ../nixos/files.nix { inherit secrets homedir configdir isWsl; });
                   }
               );
           };
