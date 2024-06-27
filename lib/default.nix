@@ -78,7 +78,7 @@ rec {
     };
 
     # Builder for a WSL system
-    mkWsl = { hostname, system ? "x86_64-linux", user, isPersonal ? true, hasGpu ? false, useX11 ? false }:
+    mkWsl = { hostname, system ? "x86_64-linux", user, isPersonal ? true, useX11 ? false }:
     let
       pkgs = import inputs.nixpkgs { inherit system overlays; };
       secrets = secretsAsAttrSet "${inputs.secrets}";
@@ -90,7 +90,7 @@ rec {
       inherit system;
 
       specialArgs = {
-        inherit pkgs hostname system user isPersonal hasGpu homedir configdir secrets isWsl useX11;
+        inherit pkgs hostname system user isPersonal homedir configdir secrets isWsl useX11;
       };
 
       modules = [
@@ -140,7 +140,7 @@ rec {
     };
 
     # Builder for a NixOS system
-    mkNixos = { hostname, system ? "x86_64-linux", user, isPersonal ? true, hasGpu ? false, useX11 ? false }:
+    mkNixos = { hostname, system ? "x86_64-linux", user, isPersonal ? true, useX11 ? false }:
     let
       pkgs = import inputs.nixpkgs { inherit system overlays; };
       secrets = secretsAsAttrSet "${inputs.secrets}";
@@ -152,7 +152,7 @@ rec {
       inherit system;
 
       specialArgs = {
-        inherit pkgs hostname system user isPersonal hasGpu homedir configdir secrets isWsl useX11;
+        inherit pkgs hostname system user isPersonal homedir configdir secrets isWsl useX11;
       };
 
       modules = [

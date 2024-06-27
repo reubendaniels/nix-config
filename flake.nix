@@ -50,13 +50,11 @@
       galactica-wsl = lib.mkWsl {
         hostname = "galactica";
         user = "leon";
-        hasGpu = true;
       };
 
       galactica = lib.mkNixos {
         hostname = "galactica";
         user = "leon";
-        hasGpu = true;
         useX11 = true;
       };
     };

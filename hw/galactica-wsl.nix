@@ -1,9 +1,9 @@
-{hasGpu, ...}:
+{ ... }:
 
 {
   hardware.opengl = {
-    enable = hasGpu;
-    driSupport = hasGpu;
-    driSupport32Bit = hasGpu;
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
 }
