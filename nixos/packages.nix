@@ -6,4 +6,6 @@ with pkgs; [
     feh
     scrot
     ucs-fonts
+    google-chrome
+    firefox
 ]
