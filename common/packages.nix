@@ -1,6 +1,6 @@
 # Common packages installed on all systems
 
-{ pkgs, isPersonal }:
+{ pkgs, isPersonal, ... }:
 
 with pkgs; [
   awscli2
