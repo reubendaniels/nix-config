@@ -8,7 +8,7 @@ end
 -- fonts
 
 config.font = wezterm.font("IosevkaLB", {weight="DemiBold"})
-config.font_size = 12.0
+config.font_size = 13.0
 config.font_rules = {
   {
     intensity = "Bold",
@@ -29,7 +29,7 @@ config.window_padding = {
   bottom = 10,
 }
 
-config.color_scheme = "OneDark (base16)";
+config.color_scheme = "OneDark (Gogh)";
 
 -- window frame colors
 --config.window_frame = {
