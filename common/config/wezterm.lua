@@ -29,7 +29,24 @@ config.window_padding = {
   bottom = 10,
 }
 
-config.color_scheme = "OneDark (Gogh)";
+-- wezterm.gui is not available to the mux server, so take care to
+-- do something reasonable when this config is evaluated by the mux
+function get_appearance()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+  return 'Dark'
+end
+
+function scheme_for_appearance(appearance)
+  if appearance:find 'Dark' then
+    return 'OneDark (base16)'
+  else
+    return 'One Light (base16)'
+  end
+end
+
+config.color_scheme = scheme_for_appearance(get_appearance())
 
 -- window frame colors
 --config.window_frame = {
