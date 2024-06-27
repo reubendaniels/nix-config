@@ -2,4 +2,5 @@
 { ... }:
 
 {
+  ".wallpaper".source = ../common/config/wallpaper/color-wave-1.jpg;
 }
