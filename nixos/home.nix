@@ -2,14 +2,42 @@
 { isWsl, ... }:
 
 {
+  # X11
+  services.xserver.enable = useX11;
+  services.xserver.displayManager.defaultSession = "none+bspwm";
+  services.xserver.displayManager.lightdm = {
+    enable = useX11;
+    greeters.slick.enable = useX11;
+    background = ../common/config/wallpaper/color-wave-1.jpg;
+  };
+
+  # Video
+  hardware.opengl.enable = useX11;
+  hardware.opengl.driSupport32Bit = useX11;
+  hardware.opengl.driSupport = useX11;
+
+  # Sound
+  sound.enable = false; # temporarily disabled
+  hardware.pulseaudio.enable = false;
+
+  # Better support for general peripherals
+  services.xserver.libinput = {
+    enable = useX11;
+    # macOS for lyfe
+    touchpad.naturalScrolling = true;
+  };
+
+  # use HiDPI
+  home.sessionVariables.GDK_SCALE = "2";
+
   # window manager: BSPWM
+  services.xserver.windowManager.bspwm = {
+    enable = useX11;
+  };
   xsession.windowManager.bspwm = {
-    enable = !isWsl;
+    enable = useX11;
     monitors = {
       "DP-0" = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
-      "DP-1" = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
-      "DP-2" = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
-      "DP-3" = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
     };
     alwaysResetDesktops = true;
     settings = {
@@ -30,17 +58,27 @@
     '';
   };
 
+  # rofi
+  programs.rofi = {
+    enable = useX11;
+    font = "IosevkaLB 12";
+    theme = "paper-float";
+  };
+
   # keyboard shortcuts
   services.sxhkd = {
-    enable = !isWsl;
+    enable = useX11;
     keybindings = {
       "super + Return" = "kitty";
       "super + @space" = "rofi -show run";
       "super + shift + q" = "bspc quit";
+
       # focus node in direction
       "super + {_,shift + }{Left,Down,Up,Right}" = "bspc node -{f,s} {west,south,north,east} --follow";
+
       # move window between monitors
       "super + alt + {Left,Right}" = "bspc node -m {prev,next} --follow";
+
       # switch desktops
       "super + 1" = "bspc desktop -f 1";
       "super + 2" = "bspc desktop -f 2";
@@ -51,6 +89,7 @@
       "super + 7" = "bspc desktop -f 7";
       "super + 8" = "bspc desktop -f 8";
       "super + 9" = "bspc desktop -f 9";
+
       # move node to desktop
       "super + shift + 1" = "bspc node -d 1";
       "super + shift + 2" = "bspc node -d 2";
@@ -64,4 +103,30 @@
     };
   };
 
+  # custom fonts
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; lib.optionals useX11 [
+      (iosevka.override {
+        privateBuildPlan = builtins.readFile ../common/config/iosevka-lb;
+        set = "lb";
+      })
+    ];
+  };
+
+  # desktop setup
+  xresources.extraConfig = ''
+    ${builtins.readFile ./config/Xresources}
+
+    ! monitor names used in configuration
+    *monitor1: DP-0
+  '';
+
+  # make cursor not tiny on HiDPI screens
+  home.pointerCursor = {
+    name = "Vanilla-DMZ";
+    package = pkgs.vanilla-dmz;
+    size = 128;
+    x11.enable = true;
+  };
 }
