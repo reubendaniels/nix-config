@@ -31,7 +31,7 @@
     fish = {
       enable = true;
       shellInit = ''
-        fish_add_path /run/wrappers/bin
+        fish_add_path --prepend /run/wrappers/bin
         fish_add_path /run/current-system/sw/bin
         if test -d $HOME/.cargo/bin
           fish_add_path $HOME/.cargo/bin
