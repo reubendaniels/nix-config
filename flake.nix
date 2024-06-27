@@ -57,6 +57,7 @@
         hostname = "galactica";
         user = "leon";
         hasGpu = true;
+        useX11 = true;
       };
     };
   };

@@ -1,4 +1,4 @@
-{ lib, pkgs, hostname, secrets, user,  ... }:
+{ lib, pkgs, hostname, secrets, user, useX11, ... }:
 
 {
   imports = [
@@ -82,6 +82,46 @@
     allowedTCPPorts = [ 22 2375 ];
   };
 
+  # custom fonts
+  fonts = {
+    fontDir.enable = useX11;
+    packages = with pkgs; lib.optionals useX11 [
+      (iosevka.override {
+        privateBuildPlan = builtins.readFile ../common/config/iosevka-lb;
+        set = "lb";
+      })
+    ];
+  };
+
+  # X11
+  services.xserver.enable = useX11;
+  services.displayManager.defaultSession = "none+bspwm";
+  services.xserver.displayManager.lightdm = {
+    enable = useX11;
+    greeters.slick.enable = useX11;
+    background = ../common/config/wallpaper/color-wave-1.jpg;
+  };
+  services.xserver.windowManager.bspwm = {
+    enable = useX11;
+  };
+
+  # Video
+  hardware.opengl.enable = useX11;
+  hardware.opengl.driSupport32Bit = useX11;
+  hardware.opengl.driSupport = useX11;
+
+  # Sound
+  sound.enable = false; # temporarily disabled
+  hardware.pulseaudio.enable = false;
+
+  # Better support for general peripherals
+  services.libinput = {
+    enable = useX11;
+    # macOS for lyfe
+    touchpad.naturalScrolling = true;
+  };
+
+ 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave

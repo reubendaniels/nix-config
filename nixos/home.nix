@@ -1,39 +1,7 @@
 # nixOS-specific user configuration
-{ isWsl, ... }:
+{ pkgs, isWsl, useX11, ... }:
 
 {
-  # X11
-  services.xserver.enable = useX11;
-  services.xserver.displayManager.defaultSession = "none+bspwm";
-  services.xserver.displayManager.lightdm = {
-    enable = useX11;
-    greeters.slick.enable = useX11;
-    background = ../common/config/wallpaper/color-wave-1.jpg;
-  };
-
-  # Video
-  hardware.opengl.enable = useX11;
-  hardware.opengl.driSupport32Bit = useX11;
-  hardware.opengl.driSupport = useX11;
-
-  # Sound
-  sound.enable = false; # temporarily disabled
-  hardware.pulseaudio.enable = false;
-
-  # Better support for general peripherals
-  services.xserver.libinput = {
-    enable = useX11;
-    # macOS for lyfe
-    touchpad.naturalScrolling = true;
-  };
-
-  # use HiDPI
-  home.sessionVariables.GDK_SCALE = "2";
-
-  # window manager: BSPWM
-  services.xserver.windowManager.bspwm = {
-    enable = useX11;
-  };
   xsession.windowManager.bspwm = {
     enable = useX11;
     monitors = {
@@ -101,17 +69,6 @@
       "super + shift + 8" = "bspc node -d 8";
       "super + shift + 9" = "bspc node -d 9";
     };
-  };
-
-  # custom fonts
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; lib.optionals useX11 [
-      (iosevka.override {
-        privateBuildPlan = builtins.readFile ../common/config/iosevka-lb;
-        set = "lb";
-      })
-    ];
   };
 
   # desktop setup

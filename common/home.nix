@@ -19,6 +19,9 @@
 
       # Use our current Java version always
       JAVA_HOME = "${pkgs.jdk17}";
+
+      # use HiDPI for GDK/GTK apps
+      GDK_SCALE = "2";
     };
   };
 
