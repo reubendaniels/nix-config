@@ -26,6 +26,30 @@
     '';
   };
 
+  # compositor
+  services.picom = {
+    enable = useX11;
+    shadow = true;
+
+    settings = {
+      "shadow-radius" = 20;
+      "corner-radius" = 10;
+      "rounded-corners-exclude" = ["! class_g = 'Polybar' && ! class_g = 'Rofi'"];
+    };
+  };
+
+  # utility toolbars
+  services.polybar = {
+    enable = useX11;
+    config = ./config/polybar;
+    script = ''
+      polybar desktop &
+      polybar status &
+      polybar title &
+    '';
+  };
+  systemd.user.services.polybar.Install.WantedBy = [ "graphical-session.target" "tray.target" ];
+
   # rofi
   programs.rofi = {
     enable = useX11;
@@ -37,7 +61,7 @@
   services.sxhkd = {
     enable = useX11;
     keybindings = {
-      "super + Return" = "kitty";
+      "super + Return" = "wezterm";
       "super + @space" = "rofi -show run";
       "super + shift + q" = "bspc quit";
 
