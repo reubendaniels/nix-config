@@ -29,53 +29,55 @@ config.window_padding = {
   bottom = 10,
 }
 
+config.color_scheme = "OneDark (base16)";
+
 -- window frame colors
-config.window_frame = {
-  inactive_titlebar_bg = '#282c34',
-  active_titlebar_bg = '#282c34',
-  inactive_titlebar_fg = '#cccccc',
-  active_titlebar_fg = '#ffffff',
-  inactive_titlebar_border_bottom = '#2b2042',
-  active_titlebar_border_bottom = '#2b2042',
-  button_fg = '#cccccc',
-  button_bg = '#2b2042',
-  button_hover_fg = '#ffffff',
-  button_hover_bg = '#3b3052',
-}
+--config.window_frame = {
+--  inactive_titlebar_bg = '#282c34',
+--  active_titlebar_bg = '#282c34',
+--  inactive_titlebar_fg = '#cccccc',
+--  active_titlebar_fg = '#ffffff',
+--  inactive_titlebar_border_bottom = '#2b2042',
+--  active_titlebar_border_bottom = '#2b2042',
+--  button_fg = '#cccccc',
+--  button_bg = '#2b2042',
+--  button_hover_fg = '#ffffff',
+--  button_hover_bg = '#3b3052',
+--}
 
 -- window content colors
-config.colors = {
-  foreground = '#dcdfe4',
-  background = '#282c34',
+--config.colors = {
+--  foreground = '#dcdfe4',
+--  background = '#282c34',
 
-  selection_fg = '#000000',
-  selection_bg = '#fffacd',
+--  selection_fg = '#000000',
+--  selection_bg = '#fffacd',
 
-  ansi = {
-    '#5d677a',
-    '#e06c75',
-    '#98c379',
-    '#e5c07b',
-    '#61afef',
-    '#c678dd',
-    '#56b6c2',
-    '#dcdfe4',
-  },
-  brights = {
-    '#5d677a',
-    '#e06c75',
-    '#98c379',
-    '#e5c07b',
-    '#61afef',
-    '#c678dd',
-    '#56b6c2',
-    '#dcdfe4',
-  },
-
-  cursor_bg = '#52ad70',
-  cursor_fg = 'black',
-  cursor_border = '#52ad70',
-}
+ -- ansi = {
+ --   '#5d677a',
+ --   '#e06c75',
+ --   '#98c379',
+ --   '#e5c07b',
+ --   '#61afef',
+ --   '#c678dd',
+ --   '#56b6c2',
+ --   '#dcdfe4',
+ -- },
+ -- brights = {
+ --   '#5d677a',
+ --   '#e06c75',
+ --   '#98c379',
+ --   '#e5c07b',
+ --   '#61afef',
+ --   '#c678dd',
+ --   '#56b6c2',
+ --   '#dcdfe4',
+ -- },
+--
+--  cursor_bg = '#52ad70',
+--  cursor_fg = 'black',
+--  cursor_border = '#52ad70',
+--}
 
 -- tab bar
 config.hide_tab_bar_if_only_one_tab = true
