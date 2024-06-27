@@ -98,7 +98,15 @@
   services.displayManager.defaultSession = "none+bspwm";
   services.xserver.displayManager.lightdm = {
     enable = useX11;
-    greeters.slick.enable = useX11;
+    greeters.slick = {
+      enable = useX11;
+      font.name = "IosevkaLB 12";
+      cursorTheme.size = 48;
+      extraConfig = ''
+        xft-dpi=192
+        enable-hidpi=on
+      '';
+    };
     background = ../common/config/wallpaper/color-wave-1.jpg;
   };
   services.xserver.windowManager.bspwm = {

@@ -102,12 +102,4 @@
     ! monitor names used in configuration
     *monitor1: DP-0
   '';
-
-  # make cursor not tiny on HiDPI screens
-  home.pointerCursor = {
-    name = "Vanilla-DMZ";
-    package = pkgs.vanilla-dmz;
-    size = 256;
-    x11.enable = true;
-  };
 }
