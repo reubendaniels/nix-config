@@ -1,4 +1,4 @@
-{ lib, pkgs, hostname, secrets, user, useX11, ... }:
+{ lib, pkgs, hostname, secrets, user, useX11, isPersonal, ... }:
 
 {
   imports = [
@@ -129,6 +129,8 @@
     touchpad.naturalScrolling = true;
   };
 
+  # Gaming!
+  programs.steam.enable = useX11 && isPersonal;
  
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
