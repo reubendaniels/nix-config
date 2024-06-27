@@ -5,7 +5,7 @@
   xsession.windowManager.bspwm = {
     enable = useX11;
     monitors = {
-      "DP-0" = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
+      "DP-2" = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
     };
     alwaysResetDesktops = true;
     settings = {
@@ -100,6 +100,6 @@
     ${builtins.readFile ./config/Xresources}
 
     ! monitor names used in configuration
-    *monitor1: DP-0
+    *monitor1: DP-2
   '';
 }
