@@ -93,3 +93,6 @@ require('lspconfig')['zls'].setup {
 EOF
 
 let g:rustfmt_autosave = 1
+
+" use terminal background
+hi Normal ctermbg=none guibg=none
