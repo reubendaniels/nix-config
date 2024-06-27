@@ -32,7 +32,7 @@
 
   # keyboard shortcuts
   services.sxhkd = {
-    enable = machineConfig.isDesktop;
+    enable = !isWsl;
     keybindings = {
       "super + Return" = "kitty";
       "super + @space" = "rofi -show run";
