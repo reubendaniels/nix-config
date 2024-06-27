@@ -2,6 +2,7 @@
 { isWsl, ... }:
 
 {
+  # window manager: BSPWM
   xsession.windowManager.bspwm = {
     enable = !isWsl;
     monitors = {
@@ -27,6 +28,40 @@
     extraConfig = ''
       feh --bg-scale ~/.wallpaper
     '';
+  };
+
+  # keyboard shortcuts
+  services.sxhkd = {
+    enable = machineConfig.isDesktop;
+    keybindings = {
+      "super + Return" = "kitty";
+      "super + @space" = "rofi -show run";
+      "super + shift + q" = "bspc quit";
+      # focus node in direction
+      "super + {_,shift + }{Left,Down,Up,Right}" = "bspc node -{f,s} {west,south,north,east} --follow";
+      # move window between monitors
+      "super + alt + {Left,Right}" = "bspc node -m {prev,next} --follow";
+      # switch desktops
+      "super + 1" = "bspc desktop -f 1";
+      "super + 2" = "bspc desktop -f 2";
+      "super + 3" = "bspc desktop -f 3";
+      "super + 4" = "bspc desktop -f 4";
+      "super + 5" = "bspc desktop -f 5";
+      "super + 6" = "bspc desktop -f 6";
+      "super + 7" = "bspc desktop -f 7";
+      "super + 8" = "bspc desktop -f 8";
+      "super + 9" = "bspc desktop -f 9";
+      # move node to desktop
+      "super + shift + 1" = "bspc node -d 1";
+      "super + shift + 2" = "bspc node -d 2";
+      "super + shift + 3" = "bspc node -d 3";
+      "super + shift + 4" = "bspc node -d 4";
+      "super + shift + 5" = "bspc node -d 5";
+      "super + shift + 6" = "bspc node -d 6";
+      "super + shift + 7" = "bspc node -d 7";
+      "super + shift + 8" = "bspc node -d 8";
+      "super + shift + 9" = "bspc node -d 9";
+    };
   };
 
 }
