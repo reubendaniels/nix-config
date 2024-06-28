@@ -32,7 +32,7 @@
     shadow = true;
 
     settings = {
-      "shadow-radius" = 10;
+      "shadow-radius" = 15;
       "corner-radius" = 10;
       #"rounded-corners-exclude" = ["! class_g = 'Polybar' && ! class_g = 'Rofi'"];
     };
