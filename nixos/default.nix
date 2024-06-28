@@ -86,6 +86,11 @@
   fonts = {
     fontDir.enable = useX11;
     packages = with pkgs; lib.optionals useX11 [
+      coding-fonts
+      sf-mono
+      sf-pro
+      geist-mono
+      intel-one-mono
       (iosevka.override {
         privateBuildPlan = builtins.readFile ../common/config/iosevka-lb;
         set = "lb";
@@ -100,7 +105,12 @@
   #services.displayManager.defaultSession = "none+bspwm";
 
   # to use gnome
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    # use Xorg, not Wayland
+    wayland = false;
+    settings.daemon.DefaultSession = "gnome-xorg.desktop";
+  };
   services.xserver.desktopManager.gnome.enable = true;
 
   # to use lightdm when using bspwm
