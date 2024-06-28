@@ -56,6 +56,7 @@
         hostname = "galactica";
         user = "leon";
         useX11 = true;
+        useGnome = true;
       };
     };
   };
