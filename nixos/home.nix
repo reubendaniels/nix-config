@@ -102,4 +102,20 @@
     ! monitor names used in configuration
     *monitor1: DP-2
   '';
+
+  # custom XDG dir names
+  xdg = {
+    enable = true;
+    userDirs = {
+      enable = true;
+      desktop = "$HOME/desktop";
+      download = "$HOME/downloads";
+      documents = "$HOME/documents";
+      templates = "$HOME/templates";
+      music = "$HOME/music";
+      videos = "$HOME/videos";
+      pictures = "$HOME/pictures";
+      publicShare = "$HOME/public";
+    };
+  };
 }
