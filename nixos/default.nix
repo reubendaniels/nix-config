@@ -129,8 +129,8 @@
   hardware.opengl.driSupport = useX11;
 
   # Sound
-  sound.enable = false;
-  hardware.pulseaudio.enable = false;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Better support for general peripherals
   services.libinput = {
