@@ -33,14 +33,22 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
 
-  # hardware
+  # CPU
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.nvidia.modesetting.enable = true;
 
+  # GPU
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+    nvidiaSettings = true;
+  };
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
   };
+
+  # disable AMD built-in GPU
+  boot.kernelParams = [ "module_blacklist=amdgpu" ];
 }
