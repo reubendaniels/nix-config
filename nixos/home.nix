@@ -1,9 +1,9 @@
 # nixOS-specific user configuration
-{ pkgs, isWsl, useX11, ... }:
+{ pkgs, isWsl, useX11, useGnome, ... }:
 
 {
   xsession.windowManager.bspwm = {
-    enable = useX11;
+    enable = useX11 && !useGnome;
     monitors = {
       "DP-2" = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
     };
@@ -28,7 +28,7 @@
 
   # compositor
   services.picom = {
-    enable = useX11;
+    enable = useX11 && !useGnome;
     shadow = true;
 
     settings = {
@@ -40,7 +40,7 @@
 
   # utility toolbars
   services.polybar = {
-    enable = useX11;
+    enable = useX11 && !useGnome;
     config = ./config/polybar;
     script = ''
       polybar desktop &
@@ -52,14 +52,14 @@
 
   # rofi
   programs.rofi = {
-    enable = useX11;
+    enable = useX11 && !useGnome;
     font = "IosevkaLB 12";
     theme = "paper-float";
   };
 
   # keyboard shortcuts
   services.sxhkd = {
-    enable = useX11;
+    enable = useX11 && !useGnome;
     keybindings = {
       "super + Return" = "wezterm";
       "super + @space" = "rofi -show run";

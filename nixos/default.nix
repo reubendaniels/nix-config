@@ -1,4 +1,4 @@
-{ lib, pkgs, hostname, secrets, user, useX11, isPersonal, ... }:
+{ lib, pkgs, hostname, secrets, user, useX11, useGnome, isPersonal, ... }:
 
 {
   imports = [
@@ -106,7 +106,7 @@
 
   # to use gnome
   services.xserver.displayManager.gdm = {
-    enable = true;
+    enable = useX11 && useGnome;
     # use Xorg, not Wayland
     wayland = false;
     settings.daemon.DefaultSession = "gnome-xorg.desktop";
@@ -115,9 +115,9 @@
 
   # to use lightdm when using bspwm
   services.xserver.displayManager.lightdm = {
-    enable = false;
+    enable = useX11 && !useGnome;
     greeters.slick = {
-      enable = useX11;
+      enable = useX11 && !useGnome;
       font.name = "IosevkaLB 12";
       cursorTheme.size = 48;
       extraConfig = ''
@@ -139,8 +139,8 @@
   hardware.opengl.driSupport = useX11;
 
   # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  sound.enable = useX11;
+  hardware.pulseaudio.enable = useX11;
 
   # Better support for general peripherals
   services.libinput = {

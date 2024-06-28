@@ -85,12 +85,13 @@ rec {
       homedir = "/home/${user}";
       configdir = "${homedir}/.config";
       isWsl = true;
+      useGnome = false;
     in
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
       specialArgs = {
-        inherit pkgs hostname system user isPersonal homedir configdir secrets isWsl useX11;
+        inherit pkgs hostname system user isPersonal homedir configdir secrets isWsl useX11 useGnome;
       };
 
       modules = [
@@ -105,9 +106,9 @@ rec {
         {
           # System packages
           environment.systemPackages =
-            (import ../common/packages.nix { inherit pkgs isPersonal isWsl useX11; })
+            (import ../common/packages.nix { inherit pkgs isPersonal isWsl useX11 useGnome; })
             ++
-            (import ../nixos/packages.nix { inherit pkgs isPersonal isWsl useX11; });
+            (import ../nixos/packages.nix { inherit pkgs isPersonal isWsl useX11 useGnome; });
 
           # Standard nixOS managed user configuration
           users.users.${user} = {
@@ -124,14 +125,14 @@ rec {
             useUserPackages = false;
 
             users.${user} = pkgs.lib.recursiveUpdate
-              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal isWsl useX11; })
+              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal isWsl useX11 useGnome; })
               (
                 pkgs.lib.recursiveUpdate
-                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal isWsl useX11; })
+                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal isWsl useX11 useGnome; })
                   {
                     home.file = pkgs.lib.recursiveUpdate
-                      (import ../common/files.nix { inherit secrets homedir configdir isWsl useX11; })
-                      (import ../nixos/files.nix { inherit secrets homedir configdir isWsl useX11; });
+                      (import ../common/files.nix { inherit secrets homedir configdir isWsl useX11 useGnome; })
+                      (import ../nixos/files.nix { inherit secrets homedir configdir isWsl useX11 useGnome; });
                   }
               );
           };
@@ -140,7 +141,7 @@ rec {
     };
 
     # Builder for a NixOS system
-    mkNixos = { hostname, system ? "x86_64-linux", user, isPersonal ? true, useX11 ? false }:
+    mkNixos = { hostname, system ? "x86_64-linux", user, isPersonal ? true, useX11 ? false, useGnome ? false }:
     let
       pkgs = import inputs.nixpkgs { inherit system overlays; };
       secrets = secretsAsAttrSet "${inputs.secrets}";
@@ -152,7 +153,7 @@ rec {
       inherit system;
 
       specialArgs = {
-        inherit pkgs hostname system user isPersonal homedir configdir secrets isWsl useX11;
+        inherit pkgs hostname system user isPersonal homedir configdir secrets isWsl useX11 useGnome;
       };
 
       modules = [
@@ -165,9 +166,9 @@ rec {
         {
           # System packages
           environment.systemPackages =
-            (import ../common/packages.nix { inherit pkgs isPersonal isWsl useX11; })
+            (import ../common/packages.nix { inherit pkgs isPersonal isWsl useX11 useGnome; })
             ++
-            (import ../nixos/packages.nix { inherit pkgs isPersonal isWsl useX11; });
+            (import ../nixos/packages.nix { inherit pkgs isPersonal isWsl useX11 useGnome; });
 
           # Standard nixOS managed user configuration
           users.users.${user} = {
@@ -184,14 +185,14 @@ rec {
             useUserPackages = false;
 
             users.${user} = pkgs.lib.recursiveUpdate
-              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal isWsl useX11; })
+              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal isWsl useX11 useGnome; })
               (
                 pkgs.lib.recursiveUpdate
-                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal isWsl useX11; })
+                  (import ../nixos/home.nix { inherit secrets pkgs configdir isPersonal isWsl useX11 useGnome; })
                   {
                     home.file = pkgs.lib.recursiveUpdate
-                      (import ../common/files.nix { inherit secrets homedir configdir isWsl useX11; })
-                      (import ../nixos/files.nix { inherit secrets homedir configdir isWsl useX11; });
+                      (import ../common/files.nix { inherit secrets homedir configdir isWsl useX11 useGnome; })
+                      (import ../nixos/files.nix { inherit secrets homedir configdir isWsl useX11 useGnome; });
                   }
               );
           };
