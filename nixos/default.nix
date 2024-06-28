@@ -95,9 +95,17 @@
 
   # X11
   services.xserver.enable = useX11;
-  services.displayManager.defaultSession = "none+bspwm";
+
+  # to use bspwm
+  #services.displayManager.defaultSession = "none+bspwm";
+
+  # to use gnome
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # to use lightdm when using bspwm
   services.xserver.displayManager.lightdm = {
-    enable = useX11;
+    enable = false;
     greeters.slick = {
       enable = useX11;
       font.name = "IosevkaLB 12";
@@ -109,8 +117,10 @@
     };
     background = ../common/config/wallpaper/color-wave-1.jpg;
   };
+
+  # to use bspwm
   services.xserver.windowManager.bspwm = {
-    enable = useX11;
+    enable = false;
   };
 
   # Video
