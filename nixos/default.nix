@@ -100,8 +100,8 @@
   #services.displayManager.defaultSession = "none+bspwm";
 
   # to use gnome
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # to use lightdm when using bspwm
   services.xserver.displayManager.lightdm = {
@@ -129,8 +129,8 @@
   hardware.opengl.driSupport = useX11;
 
   # Sound
-  sound.enable = false; # temporarily disabled
-  hardware.pulseaudio.enable = false;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Better support for general peripherals
   services.libinput = {
