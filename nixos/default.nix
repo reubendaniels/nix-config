@@ -91,6 +91,7 @@
       sf-pro
       geist-mono
       intel-one-mono
+      overpass
       (iosevka.override {
         privateBuildPlan = builtins.readFile ../common/config/iosevka-lb;
         set = "lb";

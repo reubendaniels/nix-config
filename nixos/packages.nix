@@ -7,6 +7,7 @@ with pkgs; [
   scrot
   ucs-fonts
   sf-pro
+  overpass
   google-chrome
   firefox
 ] ++ lib.optionals useGnome [
