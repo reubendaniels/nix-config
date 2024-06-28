@@ -101,6 +101,10 @@
 
   # to use gnome
   services.xserver.displayManager.gdm.enable = true;
+
+  # wayland hasn't worked in all of the years i have tried it
+  services.xserver.displayManager.gdm.wayland = false;
+
   services.xserver.desktopManager.gnome.enable = true;
 
   # to use lightdm when using bspwm
