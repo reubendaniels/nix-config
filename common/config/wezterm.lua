@@ -36,6 +36,24 @@ function get_window_decorations()
   end
 end
 
+function get_window_padding()
+  if is_macos() then
+    return {
+      left = 15,
+      right = 15,
+      top = 50,
+      bottom = 10,
+    }
+  else
+    return {
+      left = 15,
+      right = 15,
+      top = 10,
+      bottom = 10,
+    }
+  end
+end
+
 -- fonts
 
 config.font = wezterm.font("IosevkaLB", {weight="DemiBold"})
@@ -52,13 +70,7 @@ config.initial_rows = 35
 
 -- window configuration
 config.window_decorations = get_window_decorations()
-config.window_padding = {
-  left = 15,
-  right = 15,
-  top = 50,
-  bottom = 10,
-}
-
+config.window_padding = get_window_padding() 
 config.color_scheme = scheme_for_appearance(get_appearance())
 
 -- tab bar
