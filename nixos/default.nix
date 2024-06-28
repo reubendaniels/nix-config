@@ -101,10 +101,6 @@
 
   # to use gnome
   services.xserver.displayManager.gdm.enable = true;
-
-  # wayland hasn't worked in all of the years i have tried it
-  services.xserver.displayManager.gdm.wayland = false;
-
   services.xserver.desktopManager.gnome.enable = true;
 
   # to use lightdm when using bspwm
@@ -133,8 +129,8 @@
   hardware.opengl.driSupport = useX11;
 
   # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  sound.enable = false;
+  hardware.pulseaudio.enable = false;
 
   # Better support for general peripherals
   services.libinput = {
