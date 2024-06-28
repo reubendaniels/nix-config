@@ -30,9 +30,9 @@ end
 
 function get_window_decorations()
   if is_macos() then
-    return 'RESIZE'
-  else
     return 'INTEGRATED_BUTTONS|RESIZE'
+  else
+    return 'RESIZE'
   end
 end
 
