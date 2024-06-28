@@ -105,6 +105,6 @@ config.default_cursor_style = 'SteadyBar'
 config.cursor_thickness = '3px'
 
 -- linux
-config.enable_wayland = true
+config.enable_wayland = false
 
 return config
