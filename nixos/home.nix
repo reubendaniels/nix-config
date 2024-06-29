@@ -1,5 +1,5 @@
 # nixOS-specific user configuration
-{ pkgs, isWsl, useX11, useGnome, ... }:
+{ pkgs, homedir, isWsl, useX11, useGnome, ... }:
 
 {
   xsession.windowManager.bspwm = {
@@ -121,16 +121,14 @@
 
   # DConf settings
   dconf.settings = {
-    "org/gnome/desktop" = {
-      interface = {
-        font-name = "Overpass Semi-Bold 10";
-        font-hinting = "medium";
-        font-antialiasing = "rgba";
-        color-scheme = "prefer-dark";
-      };
-      screensaver = {
-        picture-uri = "file://${homedir}/.wallpaper";
-      };
+    "org/gnome/desktop/interface" = {
+      font-name = "Overpass Semi-Bold 10";
+      font-hinting = "medium";
+      font-antialiasing = "rgba";
+      color-scheme = "prefer-dark";
+    };
+    "org/gnome/desktop/background" = {
+      picture-uri = "file://${homedir}/.wallpaper";
     };
     "org/gnome/shell" = {
       disable-user-extensions = false;
