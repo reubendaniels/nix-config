@@ -39,7 +39,7 @@ with pkgs; [
   nodePackages."@angular/cli"
   nodePackages."@tailwindcss/language-server"
   nodePackages.typescript-language-server
-  nodePackages.pyright
+  pyright
   nodejs-18_x
   openssl
   pkg-config

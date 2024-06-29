@@ -136,9 +136,7 @@
   };
 
   # Video
-  hardware.opengl.enable = useX11;
-  hardware.opengl.driSupport32Bit = useX11;
-  hardware.opengl.driSupport = useX11;
+  hardware.graphics.enable = useX11;
 
   # Sound
   sound.enable = useX11;
