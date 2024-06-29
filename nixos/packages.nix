@@ -10,6 +10,7 @@ with pkgs; [
   overpass
   google-chrome
   firefox
+  zed-editor
 ] ++ lib.optionals useGnome [
   gnome.gnome-tweaks
   gnome.epiphany
