@@ -118,4 +118,25 @@
       publicShare = "$HOME/public";
     };
   };
+
+  # DConf settings
+  dconf.settings = {
+    "org/gnome/desktop" = {
+      interface = {
+        font-name = "Overpass Semi-Bold 10";
+        font-hinting = "medium";
+        font-antialiasing = "rgba";
+        color-scheme = "prefer-dark";
+      };
+      screensaver = {
+        picture-uri = "file://${homedir}/.wallpaper";
+      };
+    };
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = [
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+      ];
+    };
+  };
 }

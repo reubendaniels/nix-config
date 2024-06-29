@@ -12,4 +12,8 @@ with pkgs; [
   firefox
 ] ++ lib.optionals useGnome [
   gnome.gnome-tweaks
+  gnome.gedit
+  gnome.epiphany
+  gnome.yelp
+  gnome.cheese
 ]
