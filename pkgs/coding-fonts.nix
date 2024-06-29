@@ -7,7 +7,7 @@ stdenvNoCC.mkDerivation rec {
   src = builtins.fetchGit {
     url = "https://github.com/leonbreedt/secrets.git";
     ref = "main";
-    rev = "1796240b3615b90e1bd2b19f5204c7a6b519a8faa";
+    rev = "1796240b3615b90e1bd2b19f5204c7a6b519a8fa";
   };
 
   sourceRoot = ".";
