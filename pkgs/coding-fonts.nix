@@ -17,11 +17,12 @@ stdenvNoCC.mkDerivation rec {
     runHook preInstall
 
     install -m444 -Dt $out/share/fonts/opentype ${src}/fonts/*/*.otf
+    install -m444 -Dt $out/share/fonts/truetype ${src}/fonts/*/*.ttf
 
     runHook postInstall
   '';
 
   meta = {
-    description = "Coding fonts";
+    description = "Coding/personal fonts";
   };
 }
