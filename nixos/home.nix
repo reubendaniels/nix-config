@@ -129,6 +129,7 @@
     };
     "org/gnome/desktop/background" = {
       picture-uri = "file://${homedir}/.wallpaper";
+      picture-uri-dark = "file://${homedir}/.wallpaper";
     };
     "org/gnome/shell" = {
       disable-user-extensions = false;
