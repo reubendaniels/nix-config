@@ -2,6 +2,7 @@
 
 {
   ".aws/credentials".text = secrets.aws-credentials;
+  ".aws/config".text = secrets.aws-config;
   ".gnupg/pubring.gpg".source = secrets.pubring-gpg;
   ".gnupg/secring.gpg".source = secrets.secring-gpg;
   ".gnupg/trustdb.gpg".source = secrets.trustdb-gpg;
