@@ -68,6 +68,8 @@ with pkgs; [
   zig
   zls
   zip
+] ++ lib.optionals isPersonal [
+  localstack
 ] ++ lib.optionals (!isPersonal) [
   # from overlay
   chromedriver-latest

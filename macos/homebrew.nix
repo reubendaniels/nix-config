@@ -22,6 +22,7 @@
     "mimestream"
     "vlc"
     "transmission"    
+    "orbstack"
   ] ++ lib.optionals (!isPersonal) [
     "postman"
   ];
