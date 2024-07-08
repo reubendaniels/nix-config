@@ -71,7 +71,6 @@ with pkgs; [
 ] ++ lib.optionals isPersonal [
   localstack
 ] ++ lib.optionals (!isPersonal) [
-  # from overlay
-  chromedriver-latest
+  chromedriver
   vscode
 ]
