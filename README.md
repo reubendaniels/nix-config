@@ -5,6 +5,8 @@ Inspired by [Dustin Lyons'](https://github.com/dustinlyons/nixos-config) repo.
 Lets you have 99% the same command-line tools and configuration across macOS, Linux (nixOS)
 and Windows (WSL).
 
+See [Screenshots](#screenshots) for some pictures.
+
 ## Bootstrapping
 
 You need to do this only once for a new machine.
@@ -59,7 +61,6 @@ You need to do this only once for a new machine.
 
 10. Stop the distribution again with `wsl -t NixOS`. Now when you next start it,
     it will use the user created by the flake.
-
 
 ### NixOS
 
@@ -126,15 +127,15 @@ You need to do this only once for a new machine.
 
     Now you have a purely flake-based NixOS installation.
 
- 13. Whenever you make changes to the configuration, you can
-     Run `env FLAKE=<SYSTEM> ./rebuild` in `/etc/nixos`, where
-     `<SYSTEM>` is the name of the system in `flake.nix`. This will run `nixos-rebuild`
-     in flake mode, and switch to the built configuration afterwards.
+13. Whenever you make changes to the configuration, you can
+    Run `env FLAKE=<SYSTEM> ./rebuild` in `/etc/nixos`, where
+    `<SYSTEM>` is the name of the system in `flake.nix`. This will run `nixos-rebuild`
+    in flake mode, and switch to the built configuration afterwards.
 
 ## Using
 
 Whenever you make changes to the configuration, just run `./rebuild` in the cloned
-flake  directory to apply it to your system. Since the value of `FLAKE` defaults
+flake directory to apply it to your system. Since the value of `FLAKE` defaults
 to the current hostname, you don't have to pass a hostname for subsequent builds,
 once it has been built once.
 
@@ -169,3 +170,17 @@ sure `rust-analyzer` is installed:
 ```shell
 rustup component add rust-analyzer
 ```
+
+## Screenshots
+
+### macOS
+
+![macOS](nix-macos.png)
+
+### Linux
+
+![Linux](nix-linux.png)
+
+### WSL
+
+![WSL](nix-wsl.png)
