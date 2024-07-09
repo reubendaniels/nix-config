@@ -57,7 +57,7 @@ end
 -- fonts
 
 config.font = wezterm.font("IosevkaLB", {weight="DemiBold"})
-config.font_size = 12.0
+config.font_size = 14.0
 config.font_rules = {
   {
     intensity = "Bold",
@@ -70,7 +70,7 @@ config.initial_rows = 35
 
 -- window configuration
 config.window_decorations = get_window_decorations()
-config.window_padding = get_window_padding() 
+config.window_padding = get_window_padding()
 config.color_scheme = scheme_for_appearance(get_appearance())
 
 -- tab bar
