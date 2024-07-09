@@ -112,8 +112,8 @@
     wayland = false;
     settings.daemon.DefaultSession = "gnome-xorg.desktop";
   };
-  services.xserver.desktopManager.gnome.enable = true;
-  programs.dconf.enable = useX11 && useGnome;
+  services.xserver.desktopManager.gnome.enable = useX11 && useGnome;
+  programs.dconf.enable = true;
 
   # to use lightdm when using bspwm
   services.xserver.displayManager.lightdm = {
@@ -134,13 +134,6 @@
   services.xserver.windowManager.bspwm = {
     enable = false;
   };
-
-  # Video
-  hardware.graphics.enable = useX11;
-
-  # Sound
-  sound.enable = useX11;
-  hardware.pulseaudio.enable = useX11;
 
   # Better support for general peripherals
   services.libinput = {
