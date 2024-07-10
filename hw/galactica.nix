@@ -7,7 +7,12 @@
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [ ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    extraInstallCommands = ''
+      echo "default @saved" >> /boot/loader/loader.conf
+    '';
+  };
   boot.loader.efi.canTouchEfiVariables = true;
 
   fileSystems."/" =
