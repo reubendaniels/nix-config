@@ -58,6 +58,8 @@
         else
             set -g theme_color_scheme "dark"
         end
+
+        set -g fish_color_autosuggestion 6c6c6c
         '';
       plugins = [
         {
