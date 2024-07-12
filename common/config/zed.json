@@ -6,7 +6,11 @@
   "terminal": {
     "font_size": 14
   },
-  "theme": "One Light",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
   "soft_wrap": "none",
   "format_on_save": "off"
 }
