@@ -80,6 +80,7 @@ config.window_padding = get_window_padding()
 local appearance = wezterm.gui.get_appearance()
 local scheme_name = scheme_name_for_appearance(appearance)
 local scheme = wezterm.get_builtin_color_schemes()[scheme_name]
+scheme.brights[0] = '#6c6c6c'
 config.color_scheme = scheme_name
 
 -- environment variables
