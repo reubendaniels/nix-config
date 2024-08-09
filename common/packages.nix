@@ -6,6 +6,7 @@ with pkgs; [
   awscli2
   bat
   bun
+  btop
   cascadia-code
   coding-fonts
   cloudfoundry-cli
