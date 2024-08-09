@@ -15,6 +15,7 @@ with pkgs; [
   difftastic
   du-dust
   eza
+  fastfetch
   fd
   fish
   flyctl
@@ -35,6 +36,7 @@ with pkgs; [
   kubectl
   kubelogin-oidc
   maven
+  macchina
   neofetch
   nmap
   nodePackages."@angular/cli"
