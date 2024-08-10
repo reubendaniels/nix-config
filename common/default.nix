@@ -10,6 +10,7 @@
 
     settings = {
       trusted-substituters = [ "https://ghostty.cachix.org" ];
+      trusted-users = [ "root" "leon" ];
     };
   };
 
