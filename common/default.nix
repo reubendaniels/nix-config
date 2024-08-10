@@ -7,6 +7,10 @@
     # Don't require --extra-experimental-features every time we
     # want to use 'nix flake'
     extraOptions = "experimental-features = nix-command flakes";
+
+    settings = {
+      trusted-substituters = [ "https://ghostty.cachix.org" ];
+    };
   };
 
   # Ensure hostname is set system-wide.
