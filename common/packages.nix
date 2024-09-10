@@ -49,7 +49,7 @@ with pkgs; [
   protobuf
   python311Full
   pwgen
-  ripgrep
+#  ripgrep
   ruby_3_3
   rubyPackages_3_3.solargraph
   rustup
