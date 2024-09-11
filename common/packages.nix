@@ -58,7 +58,6 @@ with pkgs; [
   sf-mono
   step-cli
   sqlite
-  swift-format
   terraform
   tree
   tmux
