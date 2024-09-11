@@ -19,10 +19,11 @@
   homebrew = import ./homebrew.nix { inherit lib isPersonal; };
 
   # Dock configuration
-  local.dock = {
-    enable = true;
-    entries = import ./dock.nix { inherit pkgs lib isPersonal; };
-  };
+  # Disabled until Swift is fixed.
+  #local.dock = {
+  #  enable = true;
+  #  entries = import ./dock.nix { inherit pkgs lib isPersonal; };
+  #};
 
   # CA certificates
   security.pki.certificates = [
