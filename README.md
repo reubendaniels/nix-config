@@ -55,7 +55,7 @@ You need to do this only once for a new machine.
 7. To change the default user from being `root` (after failing to use `nixos`), run:
 
    ```sh
-   sudo -E /run/current-system/sw/bin/nixos-rebuild boot --flake .#<NAME>
+   sudo -E /run/current-system/sw/bin/nixos-rebuild boot --impure --flake .#<NAME>
    ```
 
    Do **not** run `./rebuild` or `nixos-rebuild switch` after this!
