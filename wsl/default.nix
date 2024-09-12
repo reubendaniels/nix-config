@@ -9,6 +9,6 @@
     defaultUser = "${user}";
 
     # Use native systemd support.
-    nativeSystemd = true;
+    nativeSystemd = false;
   };
 }
