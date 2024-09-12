@@ -34,7 +34,12 @@ You need to do this only once for a new machine.
 
 2. Run `sudo nix-channel --update` and `sudo nixos-rebuild switch` to set up the base system.
 
-3. Run `sudo nix-shell -p git` to enter a shell with `git` installed.
+3. Run the below to enter a shell with `git` installed:
+
+   ```shell
+   export NIXPKGS_ALLOW_UNFREE=1
+   nix-shell --impure -p git
+   ```
 
 4. Clone this repository to `/etc/nixos/nixos-config`.
 
@@ -80,7 +85,7 @@ You need to do this only once for a new machine.
 7. Clone this repository to `/mnt/etc/nixos`:
 
    ```shell
-   expor NIXPKGS_ALLOW_UNFREE=1
+   export NIXPKGS_ALLOW_UNFREE=1
    nix-shell --impure -p git
    git clone https://github.com/leonbreedt/nix-config.git /mnt/etc/nixos
    ```
