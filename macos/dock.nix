@@ -2,7 +2,7 @@
 {pkgs, lib, isPersonal}:
 
 [
-  { path = "${pkgs.wezterm}/Applications/WezTerm.app/"; }
+  { path = "${pkgs.wezterm}/Applications/Ghostty.app/"; }
 ] ++ lib.optionals (!isPersonal) [
   { path = "/Applications/Google Chrome.app/"; }
 ] ++ lib.optionals isPersonal [
