@@ -32,8 +32,7 @@ rec {
       modules = [
         ../common
         ../macos
-        # disabled until swift builds again
-        #../macos/lib/dock.nix
+        ../macos/lib/dock.nix
 
         inputs.home-manager.darwinModules.home-manager
 

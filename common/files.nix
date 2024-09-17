@@ -16,4 +16,5 @@
   ".config/git/work".text = secrets.git-work;
   ".config/git/personal".text = secrets.git-personal;
   ".config/zed/settings.json".text = builtins.readFile ./config/zed.json;
+  ".config/ghostty/config".text = builtins.readFile ./config/ghostty;
 }
