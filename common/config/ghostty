@@ -215,7 +215,7 @@ theme =
 background = #282c34
 
 # Foreground color for the window.
-foreground = #ffffff
+foreground = #c0c0c0
 
 # The foreground and background color for selection. If this is not set, then
 # the selection color is just the inverted window background and foreground
