@@ -23,6 +23,7 @@
     "vlc"
     "transmission"    
     "orbstack"
+    "discord"
   ] ++ lib.optionals (!isPersonal) [
     "postman"
   ];
