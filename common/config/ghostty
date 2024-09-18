@@ -559,7 +559,7 @@ shell-integration-features = no-cursor
 #   * `true`
 #   * `false`
 #
-cursor-style-blink = true
+cursor-style-blink = false
 
 # The color of the text under the cursor. If this is not set, a default will
 # be chosen.
