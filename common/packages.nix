@@ -5,6 +5,7 @@
 with pkgs; [
   awscli2
   bat
+  bazel
   bun
   btop
   cascadia-code
