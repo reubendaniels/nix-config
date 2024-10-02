@@ -68,6 +68,7 @@ with pkgs; [
   wrk
   xsv
   xh
+  yq
   zig
   zls
   zip
