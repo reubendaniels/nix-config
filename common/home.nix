@@ -39,8 +39,6 @@
           fish_add_path "/Applications/Postgres.app/Contents/Versions/latest/bin"
         end
 
-        set -gx CDPATH . $HOME/${secrets.work-project-dir} $HOME/Source $HOME/source
-
         alias kc kubectl
         alias cat "bat -p"
         alias less "bat -p"
@@ -85,10 +83,6 @@
         }
         {
           path = "~/.config/git/work";
-          condition = "gitdir:~/${secrets.work-project-dir}/";
-        }
-        {
-          path = "~/.config/git/work";
           condition = "gitdir:private/var/";
         }
       ];
@@ -102,7 +96,7 @@
         core.askPass = "";
         credential.helper = "store";
         credentialstore.locktimeoutms = 0;
-        github.user = "leonbreedt";
+        github.user = "reubendaniels";
         push.default = "tracking";
         pull.rebase = true;
         init.defaultBranch = "main";

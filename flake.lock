@@ -69,17 +69,17 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1700701951,
-        "narHash": "sha256-O9RMce+eSrW0fJlyRu73OBswThrN2QGxIxdxu5zqICA=",
+        "lastModified": 1705812530,
+        "narHash": "sha256-lWd7IKt1vgYSNry7LlYzoKT8o/4T0BoSXjrPe1qdjf4=",
         "ref": "refs/heads/main",
-        "rev": "58796dc379b1f27a608a24d2fa4a386be9380718",
-        "revCount": 20,
+        "rev": "e08396bd1592a3c0b847aa3b7e6947d8494853ea",
+        "revCount": 1,
         "type": "git",
-        "url": "ssh://git@github.com/leonbreedt/secrets.git"
+        "url": "ssh://git@github.com/reubendaniels/secrets.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/leonbreedt/secrets.git"
+        "url": "ssh://git@github.com/reubendaniels/secrets.git"
       }
     }
   },

@@ -25,18 +25,17 @@
   };
 
   # CA certificates
-  security.pki.certificates = [
-    (builtins.readFile ../common/config/sector42-ca.pem)
-    secrets.work-root-ca-01-crt
-    secrets.work-root-ca-02-crt
-  ];
+  # security.pki.certificates = [
+  #   (builtins.readFile ../common/config/sector42-ca.pem)
+  #   secrets.work-root-ca-01-crt
+  #   secrets.work-root-ca-02-crt
+  # ];
 
   # Install fonts in font directory.
   # Font configuration uses different attributes on macOS ('fonts' instead of 'packages').
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
-      coding-fonts
       sf-mono
       geist-mono
       intel-one-mono
