@@ -2,6 +2,7 @@
 
 {
   ".aws/credentials".text = secrets.aws-credentials;
+  ".aws/config".text = secrets.aws-config;
   ".gnupg/pubring.gpg".source = secrets.pubring-gpg;
   ".gnupg/secring.gpg".source = secrets.secring-gpg;
   ".gnupg/trustdb.gpg".source = secrets.trustdb-gpg;
@@ -14,4 +15,6 @@
   ".git-credentials".text = secrets.git-credentials;
   ".config/git/work".text = secrets.git-work;
   ".config/git/personal".text = secrets.git-personal;
+  ".config/zed/settings.json".text = builtins.readFile ./config/zed.json;
+  ".config/ghostty/config".text = builtins.readFile ./config/ghostty;
 }

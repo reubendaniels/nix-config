@@ -34,8 +34,7 @@
   # Install fonts in font directory.
   # Font configuration uses different attributes on macOS ('fonts' instead of 'packages').
   fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       coding-fonts
       sf-mono
       geist-mono
@@ -46,4 +45,6 @@
       })
     ];
   };
+
+  system.stateVersion = 5;
 }

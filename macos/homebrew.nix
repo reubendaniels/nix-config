@@ -11,7 +11,6 @@
   };
 
   casks = [
-    "brave-browser"
     "google-chrome"
     "jetbrains-toolbox"
     "postico"
@@ -19,9 +18,12 @@
     "zoom"
     "1password"
   ] ++ lib.optionals isPersonal [
+    "brave-browser"
     "mimestream"
     "vlc"
     "transmission"    
+    "orbstack"
+    "discord"
   ] ++ lib.optionals (!isPersonal) [
     "postman"
   ];

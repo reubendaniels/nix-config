@@ -2,7 +2,14 @@
 
 Inspired by [Leon Breedt's](https://github.com/leonbreedt/nix-config) repo.
 
+Lets you have 99% the same command-line tools and configuration across macOS, Linux (nixOS)
+and Windows (WSL).
+
+See [Screenshots](#screenshots) for some pictures.
+
 ## Bootstrapping
+
+You need to do this only once for a new machine.
 
 ### macOS
 
@@ -19,93 +26,121 @@ Inspired by [Leon Breedt's](https://github.com/leonbreedt/nix-config) repo.
 5. Whenever you make configuration changes, run `./rebuild`. If any files are
    reported as being in the way, move them out of the way and re-run.
 
-### NixOS
+### WSL
 
-**TODO:** Below instructions are outdated and not adapted for complete flake rewrite.
+1. Install and start up NixOS following the instructions in the
+   [NixOS-WSL](https://github.com/nix-community/NixOS-WSL?tab=readme-ov-file)
+   repository.
 
-1. Download the [latest NixOS stable distribution](https://nixos.org/manual/nixos/stable/index.html#sec-obtaining),
-   these instructions were tested with 22.11. Download the minimal distribution, not graphical.
-   
-2. Create a [bootable USB](https://nixos.org/manual/nixos/stable/index.html#sec-booting-from-usb).
+2. Run `sudo nix-channel --update` and `sudo nixos-rebuild switch` to set up the base system.
 
-3. Boot from the USB device.
-
-4. Create root and boot partitions and [format them with the file system of your choice](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual), use the _nixos_ and _swap_ labels, as our configuration depends on these labels, and mount the file systems in `/mnt` and `/mnt/boot`, respectively.
-   
-5. Run `nixos-generate-config --root /mnt`
-
-6. Clone this repository to `/mnt/etc/nixos/nixos-config`:
+3. Run the below to enter a shell with `git` installed:
 
    ```shell
-   nix-shell -p git
-   echo https://<USER>:<GITHUB-TOKEN>@github.com > $HOME/.git-credentials
-   git clone https://github.com/leonbreedt/nixos-config.git /mnt/etc/nixos/nixos-config
+   export NIXPKGS_ALLOW_UNFREE=1
+   nix-shell --impure -p git
    ```
 
-7. Ensure the `root` user has the SSH public key for cloning the secret repository 
+4. Clone this repository to `/etc/nixos/nixos-config`.
+
+5. Ensure the `root` user has the SSH public key for cloning the secret repository
    referenced by the `flake.nix`, it should be put in `/root/.ssh` with appropriate
    permissions. Run `ssh git@github.com` at least once, and save the GitHub SSH key
    (needed to avoid the `nixos-install` command hanging waiting for user input when
    cloning the secrets repo).
 
-8. Run the installer, where `<SYSTEM>` is the name of the system in `flake.nix`:
+6. Change to `/etc/nixos/nixos-config` and run `env FLAKE=<NAME> ./rebuild` to do the initial build.
+   Subsequent builds will not need you to specify the hostname.
+
+7. To change the default user from being `root` (after failing to use `nixos`), run:
+
+   ```sh
+   sudo -E /run/current-system/sw/bin/nixos-rebuild boot --impure --flake .#<NAME>
+   ```
+
+   Do **not** run `./rebuild` or `nixos-rebuild switch` after this!
+
+8. Then exit the NixOS shell, and run `wsl -t NixOS` to stop it from running.
+
+9. Run `wsl -d NixOS --user root exit`.
+
+10. Stop the distribution again with `wsl -t NixOS`. Now when you next start it,
+    it will use the user created by the flake.
+
+### NixOS
+
+1. Download the [latest NixOS stable distribution](https://nixos.org/manual/nixos/stable/index.html#sec-obtaining),
+   these instructions were tested with 24.05. Download the minimal distribution, not graphical.
+
+2. Create a [bootable USB](https://nixos.org/manual/nixos/stable/index.html#sec-booting-from-usb).
+
+3. Boot from the USB device.
+
+4. Create root and boot partitions and [format them with the file system of your choice](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual), use the _nixos_ and _swap_ labels, as our configuration depends on these labels, and mount the file systems in `/mnt` and `/mnt/boot`, respectively.
+
+5. Run `nixos-generate-config --root /mnt`, and copy the generated `/etc/nixos/*.nix` files to $HOME.
+
+6. Remove `/etc/nixos` directory entirely.
+
+7. Clone this repository to `/mnt/etc/nixos`:
 
    ```shell
-   nixos-install --flake "/mnt/etc/nixos/nixos-config#<SYSTEM>" -v
+   export NIXPKGS_ALLOW_UNFREE=1
+   nix-shell --impure -p git
+   git clone https://github.com/leonbreedt/nix-config.git /mnt/etc/nixos
    ```
-   
-   You will be prompted for a root password, which you can use after reboot to give
-   the normal user a password to log in if you want to use X11. Only the normal user
-   will be able to SSH in.
-   
- 9. Whenever you make changes to the configuration, you can 
-    Run `env FLAKE=<SYSTEM> ./rebuild` in `/etc/nixos/nixos-config`, where 
+
+8. Move the generated `$HOME/hardware-configuration.nix` file to the `hw` subdirectory
+   of `/mnt/etc/nixos` if not already there, and name it after the machine host name.
+
+   Remember, this file contains the details of the partitions specific to this machine,
+   as well as required kernel modules, which will be needed to rebuild the system while
+   its hardware remains the same.
+
+   Edit it if needed.
+   Uncomment the explicit per-interface enablement for the interfaces you want to use DHCP.
+
+   ```shell
+   mv $HOME/hardware-configuration.nix /mnt/etc/nixos/hw/<HOSTNAME>.nix
+   ```
+
+9. Ensure the `root` user has the SSH public key for cloning the secret repository
+   referenced by the `flake.nix`, it should be put in `/root/.ssh` with appropriate
+   permissions. Run `ssh git@github.com` at least once, and save the GitHub SSH key
+   (needed to avoid the `nixos-install` command hanging waiting for user input when
+   cloning the secrets repo).
+
+10. Create a script named `/root/git-askpass.sh` and put the below in it:
+
+    `echo PASSWORD`
+
+    Where PASSWORD is the passworf for the GitHub user. Make it executable with
+    `chmod +x /root/git-askpass.sh`.
+
+11. Run `export GIT_ASKPASS=/root/git-askpass.sh`
+
+12. Run the installer in flake installation mode, where `<SYSTEM>` is the name of
+    the system in `flake.nix`:
+
+    ```shell
+    nixos-install -v --impure --flake "/mnt/etc/nixos#<SYSTEM>"
+    ```
+
+    You will be prompted for a root password, which you can use after reboot to give
+    the normal user a password to log in if you want to use X11. Only the normal user
+    will be able to SSH in.
+
+    Now you have a purely flake-based NixOS installation.
+
+13. Whenever you make changes to the configuration, you can
+    Run `env FLAKE=<SYSTEM> ./rebuild` in `/etc/nixos`, where
     `<SYSTEM>` is the name of the system in `flake.nix`. This will run `nixos-rebuild`
     in flake mode, and switch to the built configuration afterwards.
-   
-### WSL
-
-**TODO:** Below instructions are outdated and not adapted for complete flake rewrite.
-
-1. Clone this repository on an existing NixOS system, and ensure
-   `nativeSystemd` is set to `false` in `wsl/default.nix`.
-
-3. Build the latest `main` branch on an existing NixOS system:
-
-   ```shell
-   nix build .#nixosConfigurations.<WSL-CONFIG-NAME>.config.system.build.installer
-   ```
-
-4. This will produce a tarball in `./result/tarball/nixos-wsl-installer.tar.gz`,
-   copy it somewhere (e.g USB).
-
-5. Import the NixOS distribution tarball into the appropriate location (where you want
-   `.\NixOS\` to be located, e.g. on a data drive:
-
-   ```shell
-   wsl --import NixOS .\NixOS\ nixos-wsl-installer.tar.gz --version 2
-   ```
-
-6. Launch the distribution, after it is finished it should launch the shell
-   for the user in your configuration:
-
-   ```shell
-   wsl -d NixOS
-   ```
-
-7. Clone this repository to `/etc/nixos/nixos-config`:
-
-   ```shell
-   sudo mkdir /etc/nixos
-   sudo git clone https://github.com/leonbreedt/nixos-config.git /etc/nixos/nixos-config
-   ```
-
-8. Change to `/etc/nixos/nixos-config` and run `./rebuild` to do the initial build.
 
 ## Using
 
 Whenever you make changes to the configuration, just run `./rebuild` in the cloned
-flake  directory to apply it to your system. Since the value of `FLAKE` defaults
+flake directory to apply it to your system. Since the value of `FLAKE` defaults
 to the current hostname, you don't have to pass a hostname for subsequent builds,
 once it has been built once.
 
@@ -140,3 +175,17 @@ sure `rust-analyzer` is installed:
 ```shell
 rustup component add rust-analyzer
 ```
+
+## Screenshots
+
+### macOS
+
+![macOS](nix-macos.png)
+
+### Linux
+
+![Linux](nix-linux.png)
+
+### WSL
+
+![WSL](nix-wsl.png)

@@ -1,12 +1,12 @@
 { lib, stdenvNoCC, fetchurl, unzip, p7zip }:
 
 stdenvNoCC.mkDerivation rec {
-  pname = "sf-mono";
+  pname = "sf-prfo";
   version = "1";
 
   src = fetchurl {
-    url = "https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg";
-    sha256 = "sha256-bUoLeOOqzQb5E/ZCzq0cfbSvNO1IhW1xcaLgtV2aeUU=";
+    url = "https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg";
+    sha256 = "sha256-B8xljBAqOoRFXvSOkOKDDWeYUebtMmQLJ8lF05iFnXk=";
   };
 
   nativeBuildInputs = [ p7zip ];
@@ -17,8 +17,8 @@ stdenvNoCC.mkDerivation rec {
     runHook preInstall
 
     7z x ${src}
-    cd SFMonoFonts
-    7z x 'SF Mono Fonts.pkg'
+    cd SFProFonts
+    7z x 'SF Pro Fonts.pkg'
     7z x 'Payload~'
 
     install -m444 -Dt $out/share/fonts/opentype Library/Fonts/*.otf

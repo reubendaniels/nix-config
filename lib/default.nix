@@ -61,16 +61,138 @@ rec {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = false;
-
             users.${user} = pkgs.lib.recursiveUpdate
-              (import ../common/home.nix { inherit secrets pkgs configdir isPersonal; })
+              (import ../common/home.nix { inherit secrets pkgs homedir configdir isPersonal; })
               (
                 pkgs.lib.recursiveUpdate
-                  (import ../macos/home.nix { inherit secrets pkgs configdir isPersonal; })
+                  (import ../macos/home.nix { inherit secrets pkgs homedir configdir isPersonal; })
                   {
                     home.file = pkgs.lib.recursiveUpdate
                       (import ../common/files.nix { inherit secrets homedir configdir; })
                       (import ../macos/files.nix { inherit secrets homedir configdir; });
+                  }
+              );
+          };
+        }
+      ];
+    };
+
+    # Builder for a WSL system
+    mkWsl = { hostname, system ? "x86_64-linux", user, isPersonal ? true, useX11 ? false }:
+    let
+      pkgs = import inputs.nixpkgs { inherit system overlays; };
+      secrets = secretsAsAttrSet "${inputs.secrets}";
+      homedir = "/home/${user}";
+      configdir = "${homedir}/.config";
+      isWsl = true;
+      useGnome = false;
+    in
+    inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      specialArgs = {
+        inherit pkgs hostname system user isPersonal homedir configdir secrets isWsl useX11 useGnome;
+      };
+
+      modules = [
+        ../common
+        ../nixos
+        ../wsl
+        ../hw/${hostname}-wsl.nix
+
+        inputs.nixos-wsl.nixosModules.wsl
+        inputs.home-manager.nixosModules.home-manager
+
+        {
+          # System packages
+          environment.systemPackages =
+            (import ../common/packages.nix { inherit pkgs homedir isPersonal isWsl useX11 useGnome; })
+            ++
+            (import ../nixos/packages.nix { inherit pkgs homedir isPersonal isWsl useX11 useGnome; });
+
+          # Standard nixOS managed user configuration
+          users.users.${user} = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" "docker" ];
+            name = user;
+            home = homedir;
+            shell = pkgs.fish;
+	        openssh.authorizedKeys.keys = [ secrets.ssh-authorized-key ];
+          };
+
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = false;
+
+            users.${user} = pkgs.lib.recursiveUpdate
+              (import ../common/home.nix { inherit secrets pkgs homedir configdir isPersonal isWsl useX11 useGnome; })
+              (
+                pkgs.lib.recursiveUpdate
+                  (import ../nixos/home.nix { inherit secrets pkgs homedir configdir isPersonal isWsl useX11 useGnome; })
+                  {
+                    home.file = pkgs.lib.recursiveUpdate
+                      (import ../common/files.nix { inherit secrets homedir configdir isWsl useX11 useGnome; })
+                      (import ../nixos/files.nix { inherit secrets homedir configdir isWsl useX11 useGnome; });
+                  }
+              );
+          };
+        }
+      ];
+    };
+
+    # Builder for a NixOS system
+    mkNixos = { hostname, system ? "x86_64-linux", user, isPersonal ? true, useX11 ? false, useGnome ? false }:
+    let
+      pkgs = import inputs.nixpkgs { inherit system overlays; };
+      secrets = secretsAsAttrSet "${inputs.secrets}";
+      homedir = "/home/${user}";
+      configdir = "${homedir}/.config";
+      isWsl = false;
+    in
+    inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      specialArgs = {
+        inherit pkgs hostname system user isPersonal homedir configdir secrets isWsl useX11 useGnome;
+      };
+
+      modules = [
+        ../common
+        ../nixos
+        ../hw/${hostname}.nix
+
+        inputs.home-manager.nixosModules.home-manager
+
+        {
+          # System packages
+          environment.systemPackages =
+            (import ../common/packages.nix { inherit pkgs homedir isPersonal isWsl useX11 useGnome; })
+            ++
+            (import ../nixos/packages.nix { inherit pkgs homedir isPersonal isWsl useX11 useGnome; });
+
+          # Standard nixOS managed user configuration
+          users.users.${user} = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" "docker" ];
+            name = user;
+            home = homedir;
+            shell = pkgs.fish;
+	        openssh.authorizedKeys.keys = [ secrets.ssh-authorized-key ];
+          };
+
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = false;
+
+            users.${user} = pkgs.lib.recursiveUpdate
+              (import ../common/home.nix { inherit secrets pkgs homedir configdir isPersonal isWsl useX11 useGnome; })
+              (
+                pkgs.lib.recursiveUpdate
+                  (import ../nixos/home.nix { inherit secrets pkgs homedir configdir isPersonal isWsl useX11 useGnome; })
+                  {
+                    home.file = pkgs.lib.recursiveUpdate
+                      (import ../common/files.nix { inherit secrets homedir configdir isWsl useX11 useGnome; })
+                      (import ../nixos/files.nix { inherit secrets homedir configdir isWsl useX11 useGnome; });
                   }
               );
           };

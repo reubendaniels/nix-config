@@ -3,7 +3,7 @@
 
 {
   home = {
-    stateVersion = "23.05";
+    stateVersion = "24.05";
 
     sessionVariables = {
       TERM = "xterm-256color";
@@ -19,6 +19,9 @@
 
       # Use our current Java version always
       JAVA_HOME = "${pkgs.jdk17}";
+
+      # use HiDPI for GDK/GTK apps
+      GDK_SCALE = "2";
     };
   };
 
@@ -28,7 +31,8 @@
     fish = {
       enable = true;
       shellInit = ''
-        fish_add_path /run/current-system/sw/bin
+        fish_add_path -m /run/current-system/sw/bin
+        fish_add_path -m /run/wrappers/bin
         if test -d $HOME/.cargo/bin
           fish_add_path $HOME/.cargo/bin
         end
@@ -47,6 +51,15 @@
         alias ls "eza"
         alias vi "nvim"
         alias vim "nvim"
+
+        # terminal_appearance set by wezterm
+        if [ "$terminal_appearance" = "light" ]
+            set -g theme_color_scheme "light"
+        else
+            set -g theme_color_scheme "dark"
+        end
+
+        set -g fish_color_autosuggestion 6c6c6c
         '';
       plugins = [
         {
@@ -54,7 +67,7 @@
           src = pkgs.fetchFromGitHub {
             owner = "oh-my-fish";
             repo = "theme-bobthefish";
-            rev = "2dcfcab653ae69ae95ab57217fe64c97ae05d8de";
+            rev = "faf92230221edcf6e62dd622cdff9ba947ca76c1";
             sha256 = "sha256-jBbm0wTNZ7jSoGFxRkTz96QHpc5ViAw9RGsRBkCQEIU=";
           };
         }

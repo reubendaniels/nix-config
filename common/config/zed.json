@@ -1,0 +1,16 @@
+{
+  "ui_font_size": 15,
+  "ui_font_family": "IosevkaLB Medium",
+  "buffer_font_size": 14,
+  "buffer_font_family": "IosevkaLB Semibold",
+  "terminal": {
+    "font_size": 14
+  },
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "soft_wrap": "none",
+  "format_on_save": "off"
+}

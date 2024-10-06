@@ -1,11 +1,13 @@
 # Common packages installed on all systems
 
-{ pkgs, isPersonal }:
+{ pkgs, isPersonal, ... }:
 
 with pkgs; [
   awscli2
   bat
+  bazel
   bun
+  btop
   cascadia-code
   coding-fonts
   cloudfoundry-cli
@@ -14,12 +16,14 @@ with pkgs; [
   difftastic
   du-dust
   eza
+  fastfetch
   fd
   fish
   flyctl
   fzf
   geist-mono
   gh
+  graphviz
   git-lfs
   gnupg
   go
@@ -33,23 +37,28 @@ with pkgs; [
   kubectl
   kubelogin-oidc
   maven
+  macchina
   neofetch
   nmap
+  nodePackages."@angular/cli"
   nodePackages."@tailwindcss/language-server"
   nodePackages.typescript-language-server
+  pyright
   nodejs-18_x
   openssl
-  pinentry
   pkg-config
+  protobuf
+  python311Full
   pwgen
   ripgrep
+  ruby_3_3
+  rubyPackages_3_3.solargraph
   rustup
   rust-cbindgen
   shellcheck
   sf-mono
   step-cli
   sqlite
-  swift-format
   terraform
   tree
   tmux
@@ -59,11 +68,13 @@ with pkgs; [
   wrk
   xsv
   xh
+  yq
   zig
   zls
   zip
+] ++ lib.optionals isPersonal [
+  localstack
 ] ++ lib.optionals (!isPersonal) [
-  # from overlay
-  chromedriver-latest
+  chromedriver
   vscode
 ]

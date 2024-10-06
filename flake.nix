@@ -20,9 +20,13 @@
       url = "git+ssh://git@github.com/leonbreedt/secrets.git";
       flake = false;
     };
+
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+    };
   };
 
-  outputs = {nixpkgs, nix-darwin, secrets, ...}@inputs: 
+  outputs = {nixpkgs, nix-darwin, secrets, ...}@inputs:
   let
     lib = import ./lib {
       inherit inputs;
@@ -43,6 +47,17 @@
     };
 
     nixosConfigurations = {
+      galactica-wsl = lib.mkWsl {
+        hostname = "galactica";
+        user = "leon";
+      };
+
+      galactica = lib.mkNixos {
+        hostname = "galactica";
+        user = "leon";
+        useX11 = true;
+        useGnome = true;
+      };
     };
   };
 }
