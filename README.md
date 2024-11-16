@@ -87,7 +87,7 @@ You need to do this only once for a new machine.
    ```shell
    export NIXPKGS_ALLOW_UNFREE=1
    nix-shell --impure -p git
-   git clone https://github.com/leonbreedt/nix-config.git /mnt/etc/nixos
+   git clone https://github.com/reubendaniels/nix-config.git /mnt/etc/nixos
    ```
 
 8. Move the generated `$HOME/hardware-configuration.nix` file to the `hw` subdirectory

@@ -28,6 +28,22 @@
     "postman"
   ];
 
-  masApps = {};
+  masApps = {
+    "microsoft-outlook" = 985367838;
+    "microsoft-word" = 462054704;
+    "microsoft-excel" = 462058435;
+    "microsoft-powerpoint" = 462062816;
+    "slack-for-desktop" = 803453959;
+    "whatsapp-messenger" = 310633997;
+    "amazon-prime-video" = 545519333;
+    "the-unarchiver" = 425424353;
+    "parallels-desktop" = 1085114709;
+    "apple-developer" = 640199958;
+    "pixelmator-pro" = 1289583905;
+    "apple-remote-desktop" = 409907375;
+    "1password-for-safari" = 1569813296;
+    "messenger" = 1480068668;
+    "transmit-5" = 1436522307;
+  };
 }
 

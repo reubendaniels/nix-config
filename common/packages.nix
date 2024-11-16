@@ -9,10 +9,8 @@ with pkgs; [
   bun
   btop
   cascadia-code
-  coding-fonts
   cloudfoundry-cli
   curl
-  deno
   difftastic
   du-dust
   eza
@@ -69,6 +67,7 @@ with pkgs; [
   xsv
   xh
   yq
+  zed
   zig
   zls
   zip

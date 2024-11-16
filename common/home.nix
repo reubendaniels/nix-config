@@ -43,8 +43,6 @@
           fish_add_path "/Applications/Postgres.app/Contents/Versions/latest/bin"
         end
 
-        set -gx CDPATH . $HOME/${secrets.work-project-dir} $HOME/Source $HOME/source
-
         alias kc kubectl
         alias cat "bat -p"
         alias less "bat -p"
@@ -53,11 +51,11 @@
         alias vim "nvim"
 
         # terminal_appearance set by wezterm
-        if [ "$terminal_appearance" = "light" ]
-            set -g theme_color_scheme "light"
-        else
-            set -g theme_color_scheme "dark"
-        end
+#        if [ "$terminal_appearance" = "light" ]
+#            set -g theme_color_scheme "light"
+#        else
+#            set -g theme_color_scheme "dark"
+#        end
 
         set -g fish_color_autosuggestion 6c6c6c
         '';
@@ -98,10 +96,6 @@
         }
         {
           path = "~/.config/git/work";
-          condition = "gitdir:~/${secrets.work-project-dir}/";
-        }
-        {
-          path = "~/.config/git/work";
           condition = "gitdir:private/var/";
         }
       ];
@@ -115,7 +109,7 @@
         core.askPass = "";
         credential.helper = "store";
         credentialstore.locktimeoutms = 0;
-        github.user = "leonbreedt";
+        github.user = "reubendaniels";
         push.default = "tracking";
         pull.rebase = true;
         init.defaultBranch = "main";
@@ -178,9 +172,9 @@
     direnv.enable = true;
 
     # Terminal
-    wezterm = {
-      enable = true;
-      extraConfig = builtins.readFile ./config/wezterm.lua;
-    };
+#    wezterm = {
+#      enable = true;
+#      extraConfig = builtins.readFile ./config/wezterm.lua;
+#    };
   };
 }

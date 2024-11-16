@@ -17,7 +17,7 @@
     };
 
     secrets = {
-      url = "git+ssh://git@github.com/leonbreedt/secrets.git";
+      url = "git+ssh://git@github.com/reubendaniels/secrets.git";
       flake = false;
     };
 
@@ -35,14 +35,11 @@
   in
   {
     darwinConfigurations = {
-      athena = lib.mkDarwin {
-        hostname = "athena";
-        user = "leon";
-      };
-      KHW90GQLQF = lib.mkDarwin {
-        hostname = "KHW90GQLQF";
-        user = "i070279";
-        isPersonal = false;
+      zod = lib.mkDarwin {
+        system = "x86_64-darwin";
+        hostname = "zod";
+        user = "reuben";
+        isPersonal = true;
       };
     };
 
